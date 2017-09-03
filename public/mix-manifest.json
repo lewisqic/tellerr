@@ -1,0 +1,10 @@
+{
+    "/assets/js/core.js": "/assets/js/core.js",
+    "/assets/css/skins/blue.css": "/assets/css/skins/blue.css",
+    "/assets/js/vendor.js": "/assets/js/vendor.js",
+    "/assets/js/modules/auth.js": "/assets/js/modules/auth.js",
+    "/assets/js/modules/permissions.js": "/assets/js/modules/permissions.js",
+    "/assets/js/modules/remark.js": "/assets/js/modules/remark.js",
+    "/assets/js/modules/sign-up.js": "/assets/js/modules/sign-up.js",
+    "/assets/js/modules/upgrade.js": "/assets/js/modules/upgrade.js"
+}

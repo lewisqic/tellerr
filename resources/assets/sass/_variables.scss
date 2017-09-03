@@ -1,0 +1,52 @@
+// Brands
+
+$brand-primary:          $color-primary;
+$brand-success:          #4CAF50;
+$brand-info:             #00BCD4;
+$brand-warning:          #FF9800;
+$brand-danger:           #F44336;
+$brand-secondary:        #ced4da;
+$brand-light:            #f8f9fa;
+$brand-dark:             #343a40;
+
+$blue:                  $brand-primary;
+$green:                 $brand-success;
+$cyan:                  $brand-info;
+$yellow:                $brand-warning;
+$red:                   $brand-danger;
+
+$theme-colors: (
+    primary: $blue,
+    secondary: $brand-secondary,
+    success: $green,
+    info: $cyan,
+    warning: $yellow,
+    danger: $red,
+    light: $brand-light,
+    dark: $brand-dark
+);
+
+// Form states and alerts
+
+$state-success-text:             $brand-success !default;
+$state-success-bg:               #D3EBD3 !default;
+$state-success-border:           darken($state-success-bg, 5%) !default;
+
+$state-info-text:                $brand-info !default;
+$state-info-bg:                  #C1EFF4 !default;
+$state-info-border:              darken($state-info-bg, 7%) !default;
+
+$state-warning-text:             $brand-warning !default;
+$state-warning-bg:               #FFE6C1 !default;
+$mark-bg:                        $state-warning-bg !default;
+$state-warning-border:           darken($state-warning-bg, 5%) !default;
+
+$state-danger-text:              $brand-danger !default;
+$state-danger-bg:                #FFD7DB !default;
+$state-danger-border:            darken($state-danger-bg, 5%) !default;
+
+// Border Radius
+
+$border-radius:          3px !default;
+$border-radius-lg:       4px !default;
+$border-radius-sm:       2px !default;

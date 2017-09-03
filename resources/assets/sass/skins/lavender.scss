@@ -1,0 +1,10 @@
+// import skins
+@import '../skins';
+// set primary color
+$color-primary: $color-lavender;
+// import variables
+@import '../variables';
+// import core
+@import '../core';
+// import modules
+@import '../modules';

@@ -1,0 +1,28 @@
+/**
+ * SIGN UP PAGE
+ */
+#sign_up_form {
+    .subdomain-input {
+        .help {
+            font-size: 12px;
+            position: absolute;
+            right: 15px;
+            top: -20px;
+        }
+        input[type="text"] {
+            text-align: right;
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+        /*span.input-group-addon {
+            font-size: 18px;
+            padding-left: 5px;
+            padding-right: 10px;
+        }*/
+        &.fv-has-feedback  {
+            .fv-control-feedback {
+                right: -20px;
+            }
+        }
+    }
+}

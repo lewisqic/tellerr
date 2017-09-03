@@ -1,0 +1,52 @@
+/*
+Auth
+ */
+
+.auth-wrapper {
+    .panel {
+        height: 100vh;
+        &.left {
+            background: #1F1F1F;
+            .back {
+                margin: 20px 0 0 20px;
+                a {
+                    font-size: 14px;
+                    color: #777;
+                }
+            }
+        }
+        &.right {
+            background: url('/assets/images/backgrounds/login/sky-leaves.jpg') no-repeat 40% 0;
+            background-size: cover;
+        }
+        .panel-inner {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            .logo {
+                color: #fff;
+                font-size: 42px;
+                text-align: center;
+                margin: -60px 0 0 0;
+                small {
+                    font-size: 22px;
+                    color: #777;
+                    font-weight: 100;
+                }
+            }
+            form {
+                color: #fff;
+                .forgot {
+                    margin-top: 20px;
+                    font-size: 14px;
+                    a {
+                        color: rgba(255, 255, 255, 0.4);
+                        &:hover {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

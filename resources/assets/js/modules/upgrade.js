@@ -8,6 +8,7 @@ class Upgrade {
      */
     constructor() {
         // declare our class properties
+        //this.fieldsInstance = null;
         this.stripe = Stripe(stripe_config.publishable_key);
         this.card = null;
         // call init
@@ -20,6 +21,8 @@ class Upgrade {
     init() {
         // bind events
         this.bindEvents();
+        // setup braintree
+        //this.setupBraintree();
         // setup stripe
         this.setupStripe();
     }

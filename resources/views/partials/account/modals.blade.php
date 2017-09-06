@@ -9,55 +9,27 @@
             </div>
 
             <form action="{{ url('account/billing/payment-method') }}" method="post" class="labels-right payment-form" id="add_payment_method_form">
-                <input type="hidden" name="nonce" value="">
+                <input type="hidden" name="token" value="">
                 {!! Html::hiddenInput(['method' => 'post']) !!}
 
                 <div class="modal-body">
 
-                    <h6 class="text-muted mt-3 mb-5">
+                    <h6 class="text-muted mt-3 mb-4">
                         <img src="{{ url('assets/images/credit-cards.jpg') }}" class="float-right">
                         Add New Credit/Debit Card
                     </h6>
 
 
                     <div class="form-group row">
-                        <label class="col-form-label col-sm-3">Number</label>
-                        <div class="col-sm-9">
-                            <!--  Hosted Fields div container -->
-                            <div class="form-group hosted-field">
-                                <div class="form-control" id="card_number"></div>
-                                <span class="helper-text"></span>
-                            </div>
-                            <span class="payment-lock"><i class="fa fa-lock text-muted"></i></span>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label col-sm-3">Expiration</label>
-                        <div class="col-sm-9">
-                            <div class="row">
-                                <div class="col-sm-5">
-                                    <!--  Hosted Fields div container -->
-                                    <div class="form-group hosted-field">
-                                        <div class="form-control" id="expiration_date"></div>
-                                    </div>
-                                    <span class="payment-lock"><i class="fa fa-lock text-muted"></i></span>
-                                </div>
-                                <div class="col-sm-2 text-right">
-                                    <label class="col-form-label">CVV</label>
-                                </div>
-                                <div class="col-sm-5">
-                                    <!--  Hosted Fields div container -->
-                                    <div class="form-group hosted-field">
-                                        <div class="form-control" id="cvv"></div>
-                                    </div>
-                                    <span class="payment-lock"><i class="fa fa-lock text-muted"></i></span>
-                                </div>
+                        <div class="col-sm-12">
+                            <div id="card_element">
+                                <!-- a Stripe Element will be inserted here. -->
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-sm-9 ml-auto">
+                        <div class="col-sm-12">
                             <div class="abc-checkbox abc-checkbox-primary checkbox-inline">
                                 <input type="checkbox" name="is_default" id="is_default" value="1" checked>
                                 <label for="is_default">Make this my default payment method</label>

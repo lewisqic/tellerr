@@ -58,9 +58,16 @@
                 </li>
             </ul>
             <div class="mr-auto">
+                @if ( $company->setup_completed && $company->stripe_account_status == 'deferred' )
                 <div class="alert alert-warning alert-alt ml-5 mt-3 py-2">
-                    <i class="fa fa-info-circle"></i> You must <a href="{{ url('account/verify') }}" class="text-underline text-warning">verify your account</a> before receiving payouts.
+                    <i class="fa fa-info-circle"></i> Your Stripe account still needs to be verified, <a href="{{ url('account/verify-stripe') }}" class="text-warning text-underline">click here</a> for more details.
                 </div>
+                @endif
+                @if ( $company->setup_completed && empty($company->stripe_account_status) )
+                    <div class="alert alert-warning alert-alt ml-5 mt-3 py-2">
+                        <i class="fa fa-info-circle"></i> You need to <a href="{{ url('account/activate') }}" class="text-warning text-underline">activate your account</a> before you can accept live payments.
+                    </div>
+                @endif
             </div>
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
@@ -164,10 +171,15 @@
     <div class="sidebar-scrollbar">
 
         <ul class="nav flex-column">
+            @if ( !$company->setup_completed )
+            <li class="nav-item">
+                <a href="{{ url('account/setup') }}" class="nav-link  {{ nav_active('^account/setup') }}"><i class="fa fa-magic"></i> <span>Setup Wizard</span></a>
+            </li>
+            @endif
             <li class="nav-item">
                 <a href="{{ url('account') }}" class="nav-link  {{ nav_active('^account$') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
             </li>
-            <li class="nav-item open">
+            <li class="nav-item">
                 <a href="{{ url('admin/forms') }}" class="nav-link {{ nav_active('^admin/forms') }}"><i class="fa fa-file-text-o"></i> <span>Forms</span></a>
             </li>
             <li class="nav-item dropdown">

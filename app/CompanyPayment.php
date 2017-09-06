@@ -23,7 +23,7 @@ class CompanyPayment extends BaseModel
         'company_id'                => 'required',
         'company_subscription_id'   => 'required',
         'company_payment_method_id' => 'required',
-        'braintree_transaction_id'  => 'required',
+        'stripe_charge_id'          => 'required',
         'amount'                    => 'required',
         'currency'                  => 'required',
         'status'                    => 'required',
@@ -49,16 +49,19 @@ class CompanyPayment extends BaseModel
     {
         return $this->belongsTo('\App\Company');
     }
+
     // subscriptions
     public function subscription()
     {
         return $this->belongsTo('\App\CompanySubscription', 'company_subscription_id');
     }
+
     // company_payment_methods
     public function paymentMethod()
     {
         return $this->belongsTo('\App\CompanyPaymentMethod', 'company_payment_method_id')->withTrashed();
     }
+
     // status_history
     public function statusHistory()
     {

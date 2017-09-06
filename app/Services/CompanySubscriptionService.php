@@ -25,6 +25,7 @@ class CompanySubscriptionService extends BaseService
      */
     protected $companyPaymentService;
     protected $companyPaymentMethodService;
+    protected $companyService;
 
 
     /**
@@ -130,6 +131,7 @@ class CompanySubscriptionService extends BaseService
         $data = \DB::transaction(function () use ($data) {
 
             // grab company/subscription data
+            $this->companyService = app()->make('App\Services\CompanyService');
             $subscription = app('subscription');
             $user = app('app_user');
             $user->load('member.company');
@@ -146,24 +148,41 @@ class CompanySubscriptionService extends BaseService
             if ( isset($data['payment_method']) && $data['payment_method'] == 'existing' && !empty($data['company_payment_method_id']) ) {
                 $payment_method = CompanyPaymentMethod::findOrFail($data['company_payment_method_id']);
             }
-            $token = isset($payment_method) ? $payment_method->cc_token : '';
 
-            // charge the card
+            // create a new stripe customer
+            if ( empty($company->stripe_customer_id) ) {
+                $stripe_customer = $this->companyService->createStripeCustomer([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'token' => $data['token']
+                ]);
+            } else {
+                $stripe_customer = \Stripe\Customer::retrieve($company->stripe_customer_id);
+                // create new source if we have a token
+                if ( !empty($data['token']) ) {
+                    $payment_method = $this->companyPaymentMethodService->addNewSource([
+                        'token' => $data['token'],
+                        'is_default' => true
+                    ]);
+                }
+            }
+
+            // charge the customer source
             $amount = $data['installment'] == 'year' ? $plan->price_year : $plan->price_month;
-            $charge_response = $this->companyPaymentService->chargeCard([
+            $stripe_charge = $this->companyPaymentService->chargeCustomer([
                 'amount' => $amount,
-                'nonce'  => $data['nonce'],
-                'token'  => $token
-            ], $user);
+                'customer_id' => $stripe_customer->id,
+                'source' => isset($payment_method) ? $payment_method->stripe_source_id : null
+            ]);
 
             // save our payment method record if it's a new one
-            if ( !empty($data['nonce']) ) {
+            if ( !isset($payment_method) ) {
                 CompanyPaymentMethod::where('company_id', $company->id)->update(['is_default' => 0]);
                 $payment_method_data = [
                     'company_id' => $company->id,
                     'is_default' => 1
                 ];
-                $payment_method = $this->companyPaymentMethodService->create(array_merge($payment_method_data, $charge_response['company_payment_method']));
+                $payment_method = $this->companyPaymentMethodService->create(array_merge($payment_method_data, $stripe_charge['company_payment_method']));
             }
 
             // save our payment record
@@ -174,14 +193,13 @@ class CompanySubscriptionService extends BaseService
                 'notes'                     => $data['installment'] . 'ly subscription fee',
                 'status'                    => 'complete'
             ];
-            $payment = $this->companyPaymentService->create(array_merge($payment_data, $charge_response['company_payment']));
+            $payment = $this->companyPaymentService->create(array_merge($payment_data, $stripe_charge['company_payment']));
 
             // update company subscription record with new data
             $subscription = $this->updateAfterUpgrade($subscription->id, $plan, $data['installment']);
 
-            // update company record with braintree customer id
-            $company_service = app()->make('App\Services\CompanyService');
-            $company_service->update($company->id, $charge_response['company']);
+            // update company record with stripe customer id
+            $this->companyService->update($company->id, ['stripe_customer_id' => $stripe_customer->id]);
 
             // send confirmation email
             $mail_data = [
@@ -279,11 +297,13 @@ class CompanySubscriptionService extends BaseService
         if ( $plan->{'price_' . $subscription->installment} > $subscription->{'plan_price_' . $subscription->installment} ) {
             $payment_method = CompanyPaymentMethod::findOrFail($data['company_payment_method_id']);
 
-            $charge_data = [
-                'amount' => $plan->{'price_' . $subscription->installment} - $subscription->{'plan_price_' . $subscription->installment},
-                'token'  => $payment_method->cc_token
-            ];
-            $charge_response = $this->companyPaymentService->chargeCard($charge_data, app('app_user'));
+            // charge the customer source
+            $amount = $plan->{'price_' . $subscription->installment} - $subscription->{'plan_price_' . $subscription->installment};
+            $stripe_charge = $this->companyPaymentService->chargeCustomer([
+                'amount' => $amount,
+                'customer_id' => $company->stripe_customer_id,
+                'source' => $payment_method->stripe_source_id
+            ]);
 
             // save our payment record
             $payment_data = [
@@ -293,7 +313,7 @@ class CompanySubscriptionService extends BaseService
                 'notes'                     => 'subscription plan upgrade fee',
                 'status'                    => 'complete'
             ];
-            $payment = $this->companyPaymentService->create(array_merge($payment_data, $charge_response['company_payment']));
+            $payment = $this->companyPaymentService->create(array_merge($payment_data, $stripe_charge['company_payment']));
 
             // update subscription plan details now
             $sub_data = [
@@ -424,14 +444,14 @@ class CompanySubscriptionService extends BaseService
                 if ( is_null($payment_method) ) {
                     throw new \AppExcp('No default payment method found');
                 }
-                $cc_token = $payment_method->cc_token;
 
                 // charge credit card
                 $charge_data = [
                     'amount' => $subscription->amount,
-                    'token'  => $payment_method->cc_token
+                    'customer_id' => $company->stripe_customer_id,
+                    'source'  => $payment_method->stripe_source_id
                 ];
-                $charge_response = $this->companyPaymentService->chargeCard($charge_data, null, $company->braintree_customer_id);
+                $stripe_charge = $this->companyPaymentService->chargeCustomer($charge_data);
 
                 // save our payment record
                 $payment_data = [
@@ -441,13 +461,13 @@ class CompanySubscriptionService extends BaseService
                     'notes'                     => $subscription->installment . 'ly subscription fee',
                     'status'                    => 'complete'
                 ];
-                $payment = $this->companyPaymentService->create(array_merge($payment_data, $charge_response['company_payment']));
+                $payment = $this->companyPaymentService->create(array_merge($payment_data, $stripe_charge['company_payment']));
 
                 // update subscription record
                 $subscription->next_billing_at = $subscription->installment == 'year' ? \Carbon::now()->addYear() : \Carbon::now()->addMonth();
                 $subscription->save();
 
-            } catch ( \AppExcp $e ) {
+            } catch ( \Exception $e ) {
 
                 // update subscription data
                 $subscription->status = 'canceled';

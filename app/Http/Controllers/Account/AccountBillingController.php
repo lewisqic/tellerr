@@ -186,7 +186,7 @@ class AccountBillingController extends Controller {
      */
     public function handleAddPaymentMethod()
     {
-        $response = $this->companyPaymentMethodService->addNewCard(\Request::all());
+        $response = $this->companyPaymentMethodService->addNewSource(\Request::all());
         \Msg::success('Payment method has been added successfully!');
         return response()->json(['success' => true, 'route' => url('account/billing/payment-methods')]);
     }

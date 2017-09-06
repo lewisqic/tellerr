@@ -16,16 +16,6 @@ class Js {
 
 
     /**
-     * return javascript info for braintree
-     * @return html
-     */
-    public static function braintreeConfig()
-    {
-        return '<script>const braintree_config = {tokenization_key: "' . env('BRAINTREE_TOKENIZATION_KEY') . '"};</script>';
-    }
-
-
-    /**
      * return javascript info for stripe
      * @return html
      */

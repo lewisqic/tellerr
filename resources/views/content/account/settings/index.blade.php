@@ -48,7 +48,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-sm-3">Currency</label>
                         <div class="col-sm-9">
-                            <select name="currency" class="form-control w-75">
+                            <select name="currency" class="form-control">
                                 <option value="USD" {{ $company->currency == 'USD' ? 'selected' : '' }}>USD</option>
                                 <option value="EUR" {{ $company->currency == 'EUR' ? 'selected' : '' }}>EUR</option>
                                 <option value="GBP" {{ $company->currency == 'GBP' ? 'selected' : '' }}>GBP</option>
@@ -63,7 +63,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-sm-3">Default Language</label>
                         <div class="col-sm-9">
-                            <select name="language" class="form-control w-75">
+                            <select name="language" class="form-control">
                                 <option value="English" {{ $company->language == 'English' ? 'selected' : '' }}>English</option>
                                 <option value="Espanol" {{ $company->language == 'Espanol' ? 'selected' : '' }}>Español</option>
                                 <option value="Francais" {{ $company->language == 'Francais' ? 'selected' : '' }}>Français</option>

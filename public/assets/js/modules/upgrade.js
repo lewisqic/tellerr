@@ -155,65 +155,6 @@ var Upgrade = function () {
         }
 
         /**
-         * Setup our Braintree client data
-         */
-
-    }, {
-        key: 'setupBraintree',
-        value: function setupBraintree() {
-            var self = this;
-
-            if (!$('#card_number').length) {
-                return;
-            }
-
-            braintree.client.create({
-                authorization: braintree_config.tokenization_key
-            }, function (clientErr, clientInstance) {
-
-                if (clientErr) {
-                    console.error(clientErr);
-                    return;
-                }
-
-                braintree.hostedFields.create({
-                    client: clientInstance,
-                    styles: {
-                        'input': {
-                            'font-size': '16px',
-                            'font-family': 'helvetica, tahoma, calibri, sans-serif',
-                            'color': '#464a4c'
-                        },
-                        ':focus': {
-                            'color': 'black'
-                        }
-                    },
-                    fields: {
-                        number: {
-                            selector: '#card_number',
-                            placeholder: '4111 1111 1111 1111'
-                        },
-                        cvv: {
-                            selector: '#cvv',
-                            placeholder: '123'
-                        },
-                        expirationDate: {
-                            selector: '#expiration_date',
-                            placeholder: 'MM/YY'
-                        }
-                    }
-                }, function (hostedFieldsErr, hostedFieldsInstance) {
-                    if (hostedFieldsErr) {
-                        console.error(hostedFieldsErr);
-                        return;
-                    }
-                    self.fieldsInstance = hostedFieldsInstance;
-                    $('button.submit').prop('disabled', false);
-                });
-            });
-        }
-
-        /**
          * setup our stripe stuff
          */
 
@@ -234,23 +175,26 @@ var Upgrade = function () {
                 }
             };
 
-            // Create an instance of the card Element
-            self.card = elements.create('card', { style: style });
+            if ($('#card_element').length) {
 
-            // Add an instance of the card Element into the `card-element` <div>
-            self.card.mount('#card_element');
-            self.card.on('ready', function () {
-                $('button.submit').prop('disabled', false);
-            });
+                // Create an instance of the card Element
+                self.card = elements.create('card', { style: style });
 
-            // setup error listening on card element
-            self.card.addEventListener('change', function (event) {
-                if (event.error) {
-                    self.setPaymentError(event.error.message);
-                } else {
-                    self.setPaymentError();
-                }
-            });
+                // Add an instance of the card Element into the `card-element` <div>
+                self.card.mount('#card_element');
+                self.card.on('ready', function () {
+                    $('button.submit').prop('disabled', false);
+                });
+
+                // setup error listening on card element
+                self.card.addEventListener('change', function (event) {
+                    if (event.error) {
+                        self.setPaymentError(event.error.message);
+                    } else {
+                        self.setPaymentError();
+                    }
+                });
+            }
         }
 
         /**
@@ -274,24 +218,6 @@ var Upgrade = function () {
                         self.submitPaymentForm();
                     }
                 });
-
-                /*self.fieldsInstance.tokenize(function (tokenizeErr, payload) {
-                    if ( tokenizeErr ) {
-                        let message = tokenizeErr.message;
-                        switch ( tokenizeErr.code ) {
-                            case 'HOSTED_FIELDS_FIELDS_INVALID':
-                                message = 'Value(s) entered into the credit card fields are invalid.';
-                                break;
-                            case 'HOSTED_FIELDS_FIELDS_EMPTY':
-                                message = 'The credit card input fields are empty.';
-                                break;
-                        }
-                        self.setPaymentError(message);
-                        return false;
-                    }
-                    $token.val(payload.token);
-                    self.submitPaymentForm();
-                });*/
             }
         }
 
@@ -310,7 +236,9 @@ var Upgrade = function () {
                     self.setPaymentError(error);
                 },
                 success: function success(data) {
-                    window.location = data.route;
+                    if (data.route) {
+                        window.location = data.route;
+                    }
                 }
             });
         }
@@ -329,7 +257,9 @@ var Upgrade = function () {
             } else {
                 $('.error-wrapper').removeClass('d-none');
             }
-            $('button.submit').button('reset');
+            if (message !== undefined) {
+                $('button.submit').button('reset');
+            }
         }
 
         /**

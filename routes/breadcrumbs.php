@@ -102,6 +102,12 @@
     $breadcrumbs->push('Dashboard', url('account'));
 });
 
+// setup wizard
+\Breadcrumbs::register('account/setup', function($breadcrumbs)
+{
+    $breadcrumbs->push('Setup Wizard', url('account'));
+});
+
 // profile
 \Breadcrumbs::register('account/profile', function($breadcrumbs)
 {

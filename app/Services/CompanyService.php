@@ -79,9 +79,102 @@ class CompanyService extends BaseService
     {
         // get the user
         $company = Company::findOrFail($id);
-        $company->fill(array_only($data, ['braintree_customer_id', 'name', 'email', 'subdomain', 'currency', 'language']));
+        $company->fill(array_only($data, ['stripe_customer_id', 'stripe_account_id', 'stripe_secret_key', 'stripe_publishable_key', 'name', 'email', 'subdomain', 'currency', 'language', 'setup_completed', 'stripe_account_status']));
         $company->save();
         return $company;
+    }
+
+    /**
+     * create a stripe customer record
+     * @param  array  $data [description]
+     * @return array
+     */
+    public function createStripeCustomer($data)
+    {
+
+        $customer = \Stripe\Customer::create([
+            'description' => $data['name'],
+            'email' => $data['email'],
+            'source' => $data['token']
+        ]);
+
+        return $customer;
+
+    }
+
+    /**
+     * create a stripe account
+     * @param  array  $data [description]
+     * @return array
+     */
+    public function createStripeAccount($company_id, $data)
+    {
+
+        $account = \Stripe\Account::create(array(
+            'type' => 'standard',
+            'country' => $data['country'],
+            'email' => $data['email']
+        ));
+
+        $company = $this->update($company_id, [
+           'stripe_account_id' => $account->id,
+           'stripe_secret_key' => $account->keys->secret,
+           'stripe_publishable_key' => $account->keys->publishable,
+           'stripe_account_status' => 'deferred'
+        ]);
+
+        return $company;
+
+    }
+
+    /**
+     * connect a stripe account
+     * @param  array  $data [description]
+     * @return array
+     */
+    public function connectStripeAccount($company_id, $data)
+    {
+
+
+        $token_request_body = [
+            'grant_type' => 'authorization_code',
+            'client_id' => env('STRIPE_CLIENT_ID'),
+            'code' => $data['code'],
+            'client_secret' => env('STRIPE_SECRET_KEY')
+        ];
+        $req = curl_init('https://connect.stripe.com/oauth/token');
+        curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($req, CURLOPT_POST, true );
+        curl_setopt($req, CURLOPT_POSTFIELDS, http_build_query($token_request_body));
+        $respCode = curl_getinfo($req, CURLINFO_HTTP_CODE);
+        $response = json_decode(curl_exec($req), true);
+        curl_close($req);
+
+        if ( !empty($response['error_description']) ) {
+
+            return [
+                'success' => false,
+                'message' => $response['error_description']
+            ];
+
+        } else {
+
+            $company = $this->update($company_id, [
+                'stripe_account_id' => $response['stripe_user_id'],
+                'stripe_secret_key' => $response['access_token'],
+                'stripe_publishable_key' => $response['stripe_publishable_key'],
+                'setup_completed' => true,
+                'stripe_account_status' => 'active'
+            ]);
+
+            return [
+                'success' => true,
+                'company' => $company
+            ];
+
+        }
+
+
     }
 
     /**

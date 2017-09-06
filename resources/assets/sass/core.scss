@@ -88,7 +88,8 @@ div.labels-right{
 .has-warning .form-control-label,
 .has-warning .col-form-label,
 .has-warning .form-check-label,
-.has-warning .custom-control {
+.has-warning .custom-control,
+.has-warning label {
     color: $brand-danger !important;
 }
 .has-warning .form-control {

@@ -130,42 +130,6 @@
 							</div>
 						</div>
 
-						{{--<div class="form-group row">
-							<label class="col-form-label col-sm-3">Card Number</label>
-							<div class="col-sm-9">
-								<!--  Hosted Fields div container -->
-								<div class="form-group hosted-field">
-									<div class="form-control" id="card_number"></div>
-									<span class="helper-text"></span>
-								</div>
-								<span class="payment-lock"><i class="fa fa-lock text-muted"></i></span>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-sm-3">Expiration</label>
-							<div class="col-sm-9">
-								<div class="row">
-									<div class="col-sm-5">
-										<!--  Hosted Fields div container -->
-										<div class="form-group hosted-field">
-											<div class="form-control" id="expiration_date"></div>
-										</div>
-										<span class="payment-lock"><i class="fa fa-lock text-muted"></i></span>
-									</div>
-									<div class="col-sm-2 text-right">
-										<label class="col-form-label">CVV</label>
-									</div>
-									<div class="col-sm-5">
-										<!--  Hosted Fields div container -->
-										<div class="form-group hosted-field">
-											<div class="form-control" id="cvv"></div>
-										</div>
-										<span class="payment-lock"><i class="fa fa-lock text-muted"></i></span>
-									</div>
-								</div>
-							</div>
-						</div>--}}
-
 					</div>
 
 					<div class="form-group row my-4">
@@ -249,10 +213,7 @@
 @endsection
 
 @push('scripts')
-{!! Js::braintreeConfig() !!}
 {!! Js::stripeConfig() !!}
-<script src="https://js.braintreegateway.com/web/3.21.1/js/client.min.js"></script>
-<script src="https://js.braintreegateway.com/web/3.21.1/js/hosted-fields.min.js"></script>
 <script src="https://js.stripe.com/v3/"></script>
 <script src="{{ url('assets/js/modules/upgrade.js') }}"></script>
 @endpush

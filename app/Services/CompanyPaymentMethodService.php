@@ -45,7 +45,13 @@ class CompanyPaymentMethodService extends BaseService
         $company = app('app_user')->member->company;
         CompanyPaymentMethod::where('company_id', $company->id)->update(['is_default' => 0]);
         $data = ['is_default' => true];
-        $company_payment_method  = $this->update($id, $data);
+        $company_payment_method = $this->update($id, $data);
+
+        // update record in stripe
+        $stripe_customer = \Stripe\Customer::retrieve($company->stripe_customer_id);
+        $stripe_customer->default_source = $company_payment_method->stripe_source_id;
+        $stripe_customer->save();
+
         return $company_payment_method;
     }
 
@@ -55,56 +61,33 @@ class CompanyPaymentMethodService extends BaseService
      * @throws \AppExcp
      * @return array
      */
-    public function addNewCard($data)
+    public function addNewSource($data)
     {
         $company = app('app_user')->member->company;
 
-    	$result = \Braintree_PaymentMethod::create([
-	        'customerId' => $company->braintree_customer_id,
-	        'paymentMethodNonce' => $data['nonce'],
-	        'options' => [
-                'verifyCard' => true
-	        ]
-	    ]);
+        $stripe_customer = \Stripe\Customer::retrieve($company->stripe_customer_id);
+        $source = $stripe_customer->sources->create([
+            'source' => $data['token']
+        ]);
 
-        if ( !$result->success ) {
-            $error = 'unknown cause';
-            if ( $result->errors->deepSize() > 0 ) {
-                $errors = [];
-                foreach( $result->errors->deepAll() as $error ) {
-                    $errors[] = $error->message;
-                }
-                $error = implode(', ', $errors);
-            } else {
-                $error = $result->message;
-            }
-            throw new \AppExcp($error);
-        } else {
+        // save our payment method record
+        $payment_method_data = [
+            'company_id' => $company->id,
+            'stripe_source_id' => $source->id,
+            'cc_type' => $source->brand,
+            'cc_last4' => $source->last4,
+            'cc_expiration_month' => $source->exp_month,
+            'cc_expiration_year' => $source->exp_year,
+            'is_default' => false
+        ];
+        $company_payment_method = $this->create($payment_method_data);
 
-            $paymentMethod = $result->paymentMethod;
-            $card_data = [
-                'cc_token' => $paymentMethod->token,
-                'cc_type' => $paymentMethod->cardType,
-                'cc_last4' => $paymentMethod->last4,
-                'cc_expiration_month' => $paymentMethod->expirationMonth,
-                'cc_expiration_year' => $paymentMethod->expirationYear,
-                'is_default' => false
-            ];
-        
-            // save our payment method record
-            $payment_method_data = [
-                'company_id' => $company->id
-            ];
-            $company_payment_method = $this->create(array_merge($payment_method_data, $card_data));
-
-            // set default method if requested
-            if ( isset($data['is_default']) ) {
-                $this->setDefault($company_payment_method->id);
-            }
-
-            return $company_payment_method;
-
+        // set default method if requested
+        if ( isset($data['is_default']) ) {
+            $this->setDefault($company_payment_method->id);
         }
+
+        return $company_payment_method;
 
     }
 

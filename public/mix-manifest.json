@@ -6,5 +6,6 @@
     "/assets/js/modules/permissions.js": "/assets/js/modules/permissions.js",
     "/assets/js/modules/remark.js": "/assets/js/modules/remark.js",
     "/assets/js/modules/sign-up.js": "/assets/js/modules/sign-up.js",
-    "/assets/js/modules/upgrade.js": "/assets/js/modules/upgrade.js"
+    "/assets/js/modules/upgrade.js": "/assets/js/modules/upgrade.js",
+    "/assets/js/modules/wizard.js": "/assets/js/modules/wizard.js"
 }

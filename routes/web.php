@@ -87,6 +87,10 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth:account', 'account']
 
     // Dashboard
     Route::get('/', ['uses' => 'AccountIndexController@showDashboard']);
+    Route::get('setup', ['uses' => 'AccountIndexController@showSetupWizard']);
+    Route::post('setup', ['uses' => 'AccountIndexController@saveSetupData']);
+    Route::post('create-stripe-account', ['uses' => 'AccountIndexController@createStripeAccount']);
+    Route::get('stripe-connect', ['uses' => 'AccountIndexController@connectStripeAccount']);
     Route::post('remark-setting', ['uses' => 'AccountIndexController@saveRemarkSetting']);
 
     // profile

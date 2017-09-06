@@ -42,6 +42,11 @@ class Account
             return redirect('account/billing/subscription');
         }
 
+        // check for setup completed flag, redirect if needed
+        if ( !$company->setup_completed && !preg_match('/^account\/(setup|create-stripe-account|stripe-connect|billing|profile)/', $request->path()) ) {
+            return redirect('account/setup');
+        }
+
         return $next($request);
     }
 }

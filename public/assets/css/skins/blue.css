@@ -19672,7 +19672,8 @@ div.labels-right .col-form-label {
 .has-warning .form-control-label,
 .has-warning .col-form-label,
 .has-warning .form-check-label,
-.has-warning .custom-control {
+.has-warning .custom-control,
+.has-warning label {
   color: #F44336 !important;
 }
 
@@ -20879,14 +20880,6 @@ Auth
   margin-right: 15px;
 }
 
-.hosted-field .form-control {
-  height: 38px;
-}
-
-.braintree-hosted-fields-invalid {
-  border-color: #F44336;
-}
-
 #list_member_payments_table_wrapper .dataTables_header {
   display: none;
 }
@@ -20896,5 +20889,29 @@ Auth
   border-radius: 3px;
   height: 38px;
   padding: 7px 13px;
+}
+
+/**
+ * SETUP WIZARD STYLES
+ */
+
+.wizard-progress {
+  margin: 20px 0 40px 0;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+}
+
+.wizard-progress .step-heading {
+  text-align: center;
+  background: #868e96;
+  color: #ccc;
+  font-size: 16px;
+}
+
+.wizard-progress .step-heading.active {
+  font-weight: bold;
+  background: #2196F3;
+  color: #fff;
 }
 

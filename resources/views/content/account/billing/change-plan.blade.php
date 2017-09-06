@@ -170,8 +170,7 @@
 @endsection
 
 @push('scripts')
-	{!! Js::braintreeConfig() !!}
-	<script src="https://js.braintreegateway.com/web/3.21.1/js/client.min.js"></script>
-	<script src="https://js.braintreegateway.com/web/3.21.1/js/hosted-fields.min.js"></script>
+	{!! Js::stripeConfig() !!}
+	<script src="https://js.stripe.com/v3/"></script>
 	<script src="{{ url('assets/js/modules/upgrade.js') }}"></script>
 @endpush

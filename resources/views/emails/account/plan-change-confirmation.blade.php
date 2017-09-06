@@ -2,7 +2,7 @@
 
 @section('title', 'Plan Change Confirmation')
 
-@section('heading', 'Success! Your Plan Change Has Been ' . ($type == 'upgrade' ? 'Completed' : 'Scheduled') . '!'))
+@section('heading', 'Success! Your Plan Change Has Been ' . ($type == 'upgrade' ? 'Completed' : 'Scheduled') . '!')
 @section('heading-color', '#4CAF50')
 
 @section('content')

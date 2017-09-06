@@ -14,12 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        // setup braintree api details
-        \Braintree_Configuration::environment(env('BRAINTREE_ENV'));
-        \Braintree_Configuration::merchantId(env('BRAINTREE_MERCHANT_ID'));
-        \Braintree_Configuration::publicKey(env('BRAINTREE_PUBLIC_KEY'));
-        \Braintree_Configuration::privateKey(env('BRAINTREE_PRIVATE_KEY'));
-
+        // set stripe stuff
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
     }

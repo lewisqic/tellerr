@@ -20,8 +20,8 @@ class CompanyPaymentMethod extends BaseModel
      * @var array
      */
     protected $rules = [
-        'company_id'           => 'required',
-        'cc_token'            => 'required',
+        'company_id'          => 'required',
+        'stripe_source_id'    => 'required',
         'cc_last4'            => 'required',
         'cc_expiration_month' => 'required',
         'cc_expiration_year'  => 'required',
@@ -48,6 +48,7 @@ class CompanyPaymentMethod extends BaseModel
     {
         return $this->belongsTo('\App\Company');
     }
+
     // companies
     public function payments()
     {
@@ -68,8 +69,6 @@ class CompanyPaymentMethod extends BaseModel
     /******************************************************************
      * CUSTOM ORM ACTIONS
      ******************************************************************/
-
-
 
 
 }

@@ -62,7 +62,7 @@ class Handler extends ExceptionHandler
             return response()->json($data, $code);
         } else {
             if ( !$request->isMethod('GET') ) {
-                if ( $e instanceof \App\Exceptions\AppException ) {
+                if ( $e instanceof \App\Exceptions\AppException || $e instanceof  \Stripe\Error\Base ) {
                     if ( !is_null($errors) ) {
                         return back()->withErrors($errors)->withInput();
                     } else {

@@ -27,7 +27,7 @@
 				<table id="list_company_payments_table" class="datatable table table-striped table-hover" data-url="{{ url('account/billing/history/data') }}" data-params='{}'>
 					<thead>
 					<tr>
-						<th data-name="braintree_transaction_id" data-order="false">ID</th>
+						<th data-name="id" data-order="false">ID</th>
 						<th data-name="amount">Amount</th>
 						<th data-name="status">Status</th>
 						<th data-name="notes" data-order="false">Notes</th>

@@ -39,12 +39,12 @@ class Account
 
         // check for canceled subscription or expired trial, redirect if needed
         if ( ($subscription->status == 'canceled' || is_trial_expired($subscription)) && !preg_match('/^(account\/billing|account\/profile)/', $request->path()) ) {
-            return redirect('account/billing/subscription');
+            return redir('account/billing/subscription');
         }
 
         // check for setup completed flag, redirect if needed
         if ( !$company->setup_completed && !preg_match('/^account\/(setup|create-stripe-account|stripe-connect|billing|profile)/', $request->path()) ) {
-            return redirect('account/setup');
+            return redir('account/setup');
         }
 
         return $next($request);

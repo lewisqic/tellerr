@@ -114,7 +114,7 @@ class AccountBillingController extends Controller {
         $plans = Plan::forPricingPage();
         $subscription = app('subscription');
         if ( $subscription->status != 'trial' && $subscription->status != 'canceled' ) {
-            return redirect('account/billing/subscription');
+            return redir('account/billing/subscription');
         }
         $default_plan = $plans->first();
         foreach ( $plans as $plan ) {
@@ -155,7 +155,7 @@ class AccountBillingController extends Controller {
     {
         $response = $this->companySubscriptionService->cancel();
         \Msg::success('Your subscription has been canceled successfully.');
-        return redirect('account/billing/subscription');
+        return redir('account/billing/subscription');
     }
 
     /**
@@ -166,7 +166,7 @@ class AccountBillingController extends Controller {
     {
         $response = $this->companySubscriptionService->resume();
         \Msg::success('Your subscription has been resumed successfully!');
-        return redirect('account/billing/subscription');
+        return redir('account/billing/subscription');
     }
 
     /**
@@ -177,7 +177,7 @@ class AccountBillingController extends Controller {
     {
         $response = $this->companySubscriptionService->changeInstallment(\Request::all());
         \Msg::success('Your have changed your billing period successfully!');
-        return redirect('account/billing/subscription');
+        return redir('account/billing/subscription');
     }
 
     /**
@@ -199,7 +199,7 @@ class AccountBillingController extends Controller {
     {
         $response = $this->companyPaymentMethodService->destroy($id);
         \Msg::success('Payment method has been deleted successfully!');
-        return redirect('account/billing/payment-methods');
+        return redir('account/billing/payment-methods');
     }
 
     /**
@@ -210,7 +210,7 @@ class AccountBillingController extends Controller {
     {
         $response = $this->companyPaymentMethodService->setDefault($id);
         \Msg::success('Payment method has been set to default successfully!');
-        return redirect('account/billing/payment-methods');
+        return redir('account/billing/payment-methods');
     }
 
     /**
@@ -221,7 +221,7 @@ class AccountBillingController extends Controller {
     {
         $response = $this->companySubscriptionService->changePlan(\Request::all());
         \Msg::success($response['message']);
-        return redirect('account/billing/subscription');
+        return redir('account/billing/subscription');
     }
 
     /**
@@ -232,7 +232,7 @@ class AccountBillingController extends Controller {
     {
         $response = $this->companySubscriptionService->cancelPlanChange();
         \Msg::success('Your plan change request has been canceled successfully!');
-        return redirect('account/billing/subscription');
+        return redir('account/billing/subscription');
     }
 
 }

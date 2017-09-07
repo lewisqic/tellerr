@@ -53,6 +53,54 @@ class AccountIndexController extends Controller
     }
 
     /**
+     * Show the activation page
+     *
+     * @return view
+     */
+    public function showActivate()
+    {
+        $company = app('company');
+        // redirect if account is active already
+        if ( !empty($company->stripe_account_status) ) {
+            return redir('account');
+        }
+        return view('content.account.index.activate');
+    }
+
+    /**
+     * Show the verify page
+     *
+     * @return view
+     */
+    public function showVerify()
+    {
+        $company = app('company');
+        // redirect if account is active already
+        if ( $company->stripe_account_status != 'deferred' ) {
+            return redir('account');
+        }
+        return view('content.account.index.verify');
+    }
+
+    /**
+     * Handle our account activation
+     *
+     * @return json
+     */
+    public function handleActivate()
+    {
+        try {
+            $company = $this->companyService->createStripeAccount(app('company')->id, \Request::all());
+            \Msg::success('Your account has been activated successfully! Keep an eye out for the verification email from Stripe.');
+            return redir('account');
+        } catch ( \Stripe\Error\InvalidRequest $e ) {
+            \Msg::danger('Activation failed, please see the error message below.');
+            \Session::flash('activation_failed', true);
+            return redir('account/activate');
+        }
+    }
+
+    /**
      * Save our setup wizard data
      *
      * @return json
@@ -60,9 +108,13 @@ class AccountIndexController extends Controller
     public function saveSetupData()
     {
         $data = \Request::all();
-        $data['setup_completed'] = true;
+        if ( !isset($data['setup_completed']) ) {
+            $data['setup_completed'] = true;
+        }
         $user = $this->companyService->update(app('company')->id, $data);
-        \Msg::success('Setup wizard has been completed successfully!');
+        if ( !isset($data['setup_completed']) ) {
+            \Msg::success('Setup wizard has been completed successfully!');
+        }
         return response()->json(['success' => true, 'route' => url('account')]);
     }
 
@@ -87,10 +139,10 @@ class AccountIndexController extends Controller
         $response = $this->companyService->connectStripeAccount(app('company')->id, \Request::all());
         if ( $response['success'] ) {
             \Msg::success('Your Stripe account has been connected successfully! You\'re now ready to start accepting live payments.');
-            return redirect('account');
+            return redir('account');
         } else {
             \Msg::danger($response['message']);
-            return redirect('account/setup');
+            return redir('account/setup');
         }
     }
 

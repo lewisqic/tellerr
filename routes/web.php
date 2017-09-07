@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Index'], function () {
     Route::get('sign-up/{id}', ['uses' => 'IndexIndexController@showSignUp']);
     Route::post('validate-subdomain', ['uses' => 'IndexIndexController@handleValidateSubdomain']);
     Route::post('sign-up', ['uses' => 'IndexIndexController@handleSignUp']);
+    Route::post('webhook/stripe', ['uses' => 'IndexIndexController@handleStripeWebhook']);
 });
 
 
@@ -89,7 +90,10 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth:account', 'account']
     Route::get('/', ['uses' => 'AccountIndexController@showDashboard']);
     Route::get('setup', ['uses' => 'AccountIndexController@showSetupWizard']);
     Route::post('setup', ['uses' => 'AccountIndexController@saveSetupData']);
+    Route::get('activate', ['uses' => 'AccountIndexController@showActivate']);
+    Route::post('activate', ['uses' => 'AccountIndexController@handleActivate']);
     Route::post('create-stripe-account', ['uses' => 'AccountIndexController@createStripeAccount']);
+    Route::get('verify', ['uses' => 'AccountIndexController@showVerify']);
     Route::get('stripe-connect', ['uses' => 'AccountIndexController@connectStripeAccount']);
     Route::post('remark-setting', ['uses' => 'AccountIndexController@saveRemarkSetting']);
 

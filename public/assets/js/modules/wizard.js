@@ -64,6 +64,13 @@ var Wizard = function () {
                 e.preventDefault();
                 self.submitForm();
             });
+
+            $('.save-settings').on('click', function (e) {
+                e.preventDefault();
+                self.submitForm({
+                    setup_completed: 0
+                }, false);
+            });
         }
 
         /**
@@ -179,18 +186,22 @@ var Wizard = function () {
 
     }, {
         key: 'submitForm',
-        value: function submitForm() {
-
+        value: function submitForm(data, redirect) {
+            var extraData = data === undefined ? {} : data;
+            var doRedirect = redirect === undefined ? true : redirect;
             $('#setup_wizard_form').ajaxSubmit({
+                data: extraData,
                 beforeSubmit: function beforeSubmit() {
-                    $('.finish-setup').addClass('disabled').find('.fa').removeClass('fa-check').addClass('fa-circle-o-notch fa-spin');
+                    if (doRedirect) {
+                        $('.finish-setup').addClass('disabled').find('.fa').removeClass('fa-check').addClass('fa-circle-o-notch fa-spin');
+                    }
                 },
                 error: function error(jqXHR, textStatus, errorThrown) {
                     var error = jqXHR.responseJSON && jqXHR.responseJSON.message ? jqXHR.responseJSON.message : jqXHR.responseText ? jqXHR.responseText : 'Oops, something went wrong...';
                     alert(error);
                 },
                 success: function success(data) {
-                    if (data.route) {
+                    if (data.route && doRedirect) {
                         window.location = data.route;
                     }
                 }

@@ -112,5 +112,20 @@ class IndexIndexController extends Controller
         return response()->json(['success' => true]);
     }
 
+    /**
+     * process stripe webhook
+     * @return json
+     */
+    public function handleStripeWebhook()
+    {
+
+        // get request data
+        $data = \Request::json()->all();
+
+        \Log::info($data);
+
+
+    }
+
 
 }

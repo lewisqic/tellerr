@@ -59,8 +59,8 @@
             </ul>
             <div class="mr-auto">
                 @if ( $company->setup_completed && $company->stripe_account_status == 'deferred' )
-                <div class="alert alert-warning alert-alt ml-5 mt-3 py-2">
-                    <i class="fa fa-info-circle"></i> Your Stripe account still needs to be verified, <a href="{{ url('account/verify-stripe') }}" class="text-warning text-underline">click here</a> for more details.
+                <div class="alert alert-primary alert-alt ml-5 mt-3 py-2">
+                    <i class="fa fa-info-circle"></i> Your Stripe account still needs to be verified, <a href="{{ url('account/verify') }}" class="text-underline">click here</a> for more details.
                 </div>
                 @endif
                 @if ( $company->setup_completed && empty($company->stripe_account_status) )

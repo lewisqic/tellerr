@@ -105,7 +105,21 @@
 // setup wizard
 \Breadcrumbs::register('account/setup', function($breadcrumbs)
 {
-    $breadcrumbs->push('Setup Wizard', url('account'));
+    $breadcrumbs->push('Setup Wizard', url('account/setup'));
+});
+
+// activation
+\Breadcrumbs::register('account/activate', function($breadcrumbs)
+{
+    $breadcrumbs->parent('account');
+    $breadcrumbs->push('Activate Account', url('account/activate'));
+});
+
+// verify
+\Breadcrumbs::register('account/verify', function($breadcrumbs)
+{
+    $breadcrumbs->parent('account');
+    $breadcrumbs->push('Verify Account', url('account/verify'));
 });
 
 // profile

@@ -76,8 +76,8 @@ var Upgrade = function () {
         value: function handleInstallmentRadioChange() {
             var installment = $('input[name="installment"]:checked').attr('data-installment');
             var price = $('input[name="installment"]:checked').attr('data-price');
-            $('.installment-term').addClass('d-none');
-            $('.installment-term[data-installment="' + installment + '"]').removeClass('d-none');
+            $('.installment-term').hide();
+            $('.installment-term[data-installment="' + installment + '"]').show();
             $('.installment-price').html(price);
         }
 
@@ -107,16 +107,16 @@ var Upgrade = function () {
             var current_amount = parseFloat($('.current-amount').val());
             var selected_price = $('select[name="plan_id"] option:selected').attr('data-price');
 
-            $('.payment-required, .no-payment-required').addClass('d-none');
+            $('.payment-required, .no-payment-required').hide();
 
             if (selected_price !== undefined) {
                 var new_price = parseFloat(selected_price.replace(/\$/, ''));
                 if (new_price > current_amount) {
-                    $('.payment-required').removeClass('d-none');
+                    $('.payment-required').show();
                     var total_due = new_price - current_amount;
                     $('.total-due-today').html('$' + total_due.toFixed(2));
                 } else {
-                    $('.no-payment-required').removeClass('d-none');
+                    $('.no-payment-required').show();
                 }
                 $('.new-plan-price').html('$' + new_price);
             }
@@ -131,7 +131,7 @@ var Upgrade = function () {
         value: function handleSubmitClick() {
             var self = this;
             $('button.submit').button('loading');
-            $('.error-wrapper').addClass('d-none');
+            $('.error-wrapper').hide();
 
             if ($('#change_plan_form').length) {
                 $('#change_plan_form').submit();
@@ -150,8 +150,8 @@ var Upgrade = function () {
         key: 'handlePaymentMethodRadioChange',
         value: function handlePaymentMethodRadioChange() {
             var val = $('input[name="payment_method"]:checked').val();
-            $('.payment-methods-wrapper').addClass('d-none');
-            $('.payment-methods-wrapper[data-method="' + val + '"]').removeClass('d-none');
+            $('.payment-methods-wrapper').hide();
+            $('.payment-methods-wrapper[data-method="' + val + '"]').show();
         }
 
         /**
@@ -253,9 +253,9 @@ var Upgrade = function () {
             $('input[name="token"]').val('');
             $('.error-message').html(message);
             if (message === undefined) {
-                $('.error-wrapper').addClass('d-none');
+                $('.error-wrapper').hide();
             } else {
-                $('.error-wrapper').removeClass('d-none');
+                $('.error-wrapper').show();
             }
             if (message !== undefined) {
                 $('button.submit').button('reset');
@@ -305,8 +305,8 @@ var Upgrade = function () {
                      $('.apply-coupon').hide();
                     $('.remove-coupon').show();*/
 
-                    $('.apply-coupon').addClass('d-none');
-                    $('.remove-coupon').removeClass('d-none');
+                    $('.apply-coupon').hide();
+                    $('.remove-coupon').show();
                     self.setCouponMessage('Coupon applied successfully.', 'success');
                 }
             });
@@ -321,8 +321,8 @@ var Upgrade = function () {
         value: function removeCoupon() {
             var self = this;
             $('input[name="coupon"]').val('');
-            $('.remove-coupon').addClass('d-none');
-            $('.apply-coupon').removeClass('d-none');
+            $('.remove-coupon').hide();
+            $('.apply-coupon').show();
             self.setCouponMessage('');
         }
 

@@ -50,6 +50,19 @@ function nav_active($pattern) {
 }
 
 /**
+ * add the ordinal suffix to a number
+ * @param int $number
+ * @return string
+ */
+function ordinal($number) {
+    $ends = array('th','st','nd','rd','th','th','th','th','th','th');
+    if ((($number % 100) >= 11) && (($number%100) <= 13))
+        return $number. 'th';
+    else
+        return $number. $ends[$number % 10];
+}
+
+/**
  * check if a subscription is in trial mode or not
  * @param  obj $subscription
  * @return boolean

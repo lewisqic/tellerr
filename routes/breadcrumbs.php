@@ -206,3 +206,25 @@
     $breadcrumbs->parent('account/roles/show', $role);
     $breadcrumbs->push('Edit', url('account/roles/edit/' . $role->id));
 });
+
+// forms
+\Breadcrumbs::register('account/forms', function($breadcrumbs)
+{
+    $breadcrumbs->parent('account');
+    $breadcrumbs->push('Forms', url('account/forms'));
+});
+\Breadcrumbs::register('account/forms/create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('account/forms');
+    $breadcrumbs->push('Create', url('account/forms/create'));
+});
+\Breadcrumbs::register('account/forms/show', function($breadcrumbs, $form)
+{
+    $breadcrumbs->parent('account/forms');
+    $breadcrumbs->push($form->name, url('account/forms/' . $form->id));
+});
+\Breadcrumbs::register('account/forms/edit', function($breadcrumbs, $form)
+{
+    $breadcrumbs->parent('account/forms/show', $form);
+    $breadcrumbs->push('Edit', url('account/forms/edit/' . $form->id));
+});

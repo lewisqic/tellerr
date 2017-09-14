@@ -102,10 +102,10 @@ var Wizard = function () {
             }
 
             // hide all steps
-            $('.step-content').addClass('d-none');
+            $('.step-content').hide();
             $('.step-heading').removeClass('active');
             // now show the necessary step
-            $('.step-content[data-step="' + nextStep + '"]').removeClass('d-none');
+            $('.step-content[data-step="' + nextStep + '"]').show();
             $('.step-heading[data-step="' + nextStep + '"]').addClass('active');
         }
 
@@ -116,14 +116,14 @@ var Wizard = function () {
     }, {
         key: 'activationOption',
         value: function activationOption($this) {
-            $('.abc-radio .form-text').addClass('d-none');
-            $this.closest('.abc-radio').find('.form-text').removeClass('d-none');
+            $('.abc-radio .form-text').hide();
+            $this.closest('.abc-radio').find('.form-text').show();
 
             if ($this.val() == 'now') {
-                $('.activation-fields').removeClass('d-none');
+                $('.activation-fields').show();
                 $('.next-step:visible').addClass('activate-now');
             } else {
-                $('.activation-fields, .activation-error').addClass('d-none');
+                $('.activation-fields, .activation-error').hide();
                 $('.next-step:visible').removeClass('activate-now');
             }
         }
@@ -160,21 +160,21 @@ var Wizard = function () {
                         email: $('input[name="stripe_email"]').val()
                     },
                     beforeSend: function beforeSend() {
-                        $('.activation-error').addClass('d-none');
+                        $('.activation-error').hide();
                         $('.next-step.stripe').find('.fa').removeClass('fa-long-arrow-right').addClass('fa-circle-o-notch fa-spin');
                     }
                 }).done(function (data, textStatus, jqXHR) {
 
                     // show activation success now
                     $('#activation_later').prop('disabled', true);
-                    $('.activation-fields').addClass('d-none');
-                    $('.activation-success').removeClass('d-none');
+                    $('.activation-fields').hide();
+                    $('.activation-success').show();
 
                     $('.next-step.stripe').find('.fa').removeClass('fa-circle-o-notch fa-spin').addClass('fa-long-arrow-right');
                     $('.next-step.stripe').removeClass('activate-now').trigger('click');
                 }).fail(function (jqXHR, textStatus, errorThrown) {
 
-                    $('.activation-error').removeClass('d-none');
+                    $('.activation-error').show();
                     $('.next-step.stripe').find('.fa').removeClass('fa-circle-o-notch fa-spin').addClass('fa-long-arrow-right');
                 });
             }

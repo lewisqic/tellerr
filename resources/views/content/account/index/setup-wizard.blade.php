@@ -40,7 +40,7 @@
                     <label class="col-form-label col-sm-3">Company Name</label>
                     <div class="col-sm-6">
                         <input type="text" name="name" class="form-control" value="{{ $company->name }}">
-                        <small class="form-text text-muted">You can <em>optionally</em> enter in the name of your company or organization.</small>
+                        <div class="form-text text-muted font-13">You can <em>optionally</em> enter in the name of your company or organization.</div>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
                     <label class="col-form-label col-sm-3">Account Email</label>
                     <div class="col-sm-6">
                         <input type="text" name="email" class="form-control" value="{{ $company->email }}" data-fv-notempty="true" data-fv-emailaddress="true">
-                        <small class="form-text text-muted">This is the default email address that all account related emails and notifications will be sent to.</small>
+                        <div class="form-text text-muted font-13">This is the default email address that all account related emails and notifications will be sent to.</div>
                     </div>
                 </div>
 
@@ -63,7 +63,7 @@
                             <option value="CAD" {{ $company->currency == 'CAD' ? 'selected' : '' }}>CAD</option>
                             <option value="AUD" {{ $company->currency == 'AUD' ? 'selected' : '' }}>AUD</option>
                         </select>
-                        <small class="form-text text-muted">This currency setting only applies to payments made by your own customers.  Your subscription payments to Tellerr will always be made in USD.</small>
+                        <div class="form-text text-muted font-13">This currency setting only applies to payments made by your own customers.  Your subscription payments to Tellerr will always be made in USD.</div>
                     </div>
                 </div>
 
@@ -76,7 +76,7 @@
                             <option value="Francais" {{ $company->language == 'Francais' ? 'selected' : '' }}>Français</option>
                             <option value="Deutsche" {{ $company->language == 'Deutsche' ? 'selected' : '' }}>Deutsche</option>
                         </select>
-                        <small class="form-text text-muted">Your default language setting will apply to your Tellerr account area as well as your own payment forms and invoices.</small>
+                        <div class="form-text text-muted font-13">Your default language setting will apply to your Tellerr account area as well as your own payment forms and invoices.</div>
                     </div>
                 </div>
 
@@ -88,7 +88,7 @@
 
             </div>
 
-            <div class="step-content d-none" data-step="2">
+            <div class="step-content display-none" data-step="2">
 
                 <div class="row mb-4">
                     <div class="col-sm-9 ml-auto">
@@ -129,7 +129,7 @@
                         <div class="abc-radio abc-radio-primary">
                             <input type="radio" name="activation" id="activation_later" value="later" data-fv-notempty="true" {{ $stripe_account_created ? 'disabled' : '' }}>
                             <label for="activation_later">I'll do it later, just let me pass!</label>
-                            <small class="form-text text-muted d-none">No problem, feel free to complete your account activation whenever you're ready.</small>
+                            <div class="form-text text-muted font-13 display-none">No problem, feel free to complete your account activation whenever you're ready.</div>
                         </div>
                         <div class="abc-radio abc-radio-primary mt-3">
                             <input type="radio" name="activation" id="activation_now" value="now" data-fv-notempty="true"  {{ $stripe_account_created ? 'checked' : '' }}>
@@ -138,7 +138,7 @@
                     </div>
                 </div>
 
-                <div class="activation-fields d-none mt-3">
+                <div class="activation-fields display-none mt-3">
 
                     <div class="row mb-3">
                         <div class="col-sm-6 mx-auto">
@@ -196,7 +196,7 @@
                                 <option value="GB">United Kingdom</option>
                                 <option value="US" selected>United States</option>
                             </select>
-                            <small class="form-text text-muted">Please select the country that you want your Stripe account to be set up in.</small>
+                            <div class="form-text text-muted font-13">Please select the country that you want your Stripe account to be set up in.</div>
                         </div>
                     </div>
 
@@ -204,13 +204,13 @@
                         <label class="col-form-label col-sm-3">Email</label>
                         <div class="col-sm-6">
                             <input type="text" name="stripe_email" class="form-control" value="{{ $company->email }}" data-fv-notempty="true" data-fv-emailaddress="true">
-                            <small class="form-text text-muted">Enter the email address you want to be used in setting up your new Stripe account. (If you already have a Stripe account, enter in the email address for your existing account)</small>
+                            <div class="form-text text-muted font-13">Enter the email address you want to be used in setting up your new Stripe account. (If you already have a Stripe account, enter in the email address for your existing account)</div>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="activation-success mt-3 {{ $stripe_account_created ? '' : 'd-none' }}">
+                <div class="activation-success mt-3 {{ $stripe_account_created ? '' : 'display-none' }}">
 
                     <div class="row mb-3">
                         <div class="col-sm-6 mx-auto">
@@ -229,7 +229,7 @@
 
                 </div>
 
-                <div class="activation-error d-none">
+                <div class="activation-error display-none">
 
                     <div class="row mb-3">
                         <div class="col-sm-6 mx-auto">
@@ -264,7 +264,7 @@
 
             </div>
 
-            <div class="step-content d-none" data-step="3">
+            <div class="step-content display-none" data-step="3">
 
                 <div class="row mb-4">
                     <div class="col-sm-9 ml-auto">

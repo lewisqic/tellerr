@@ -42,7 +42,7 @@
 
             </div>
 
-            <div class="activation-error mb-4 {{ \Session::has('activation_failed') ? '' : 'd-none' }}">
+            <div class="activation-error mb-4 {{ \Session::has('activation_failed') ? '' : 'display-none' }}">
 
 
                 <div class="alert alert-alt alert-danger mt-1 pr-0">
@@ -91,7 +91,7 @@
                         <option value="GB">United Kingdom</option>
                         <option value="US" selected>United States</option>
                     </select>
-                    <small class="form-text text-muted">Please select the country that you want your Stripe account to be set up in.</small>
+                    <div class="form-text text-muted font-13">Please select the country that you want your Stripe account to be set up in.</div>
                 </div>
             </div>
 
@@ -99,7 +99,7 @@
                 <label class="col-form-label col-sm-3">Email</label>
                 <div class="col-sm-9">
                     <input type="text" name="email" class="form-control" value="{{ $company->email }}" data-fv-notempty="true" data-fv-emailaddress="true">
-                    <small class="form-text text-muted">Enter the email address you want to be used in setting up your new Stripe account. (If you already have a Stripe account, enter in the email address for your existing account)</small>
+                    <div class="form-text text-muted font-13">Enter the email address you want to be used in setting up your new Stripe account. (If you already have a Stripe account, enter in the email address for your existing account)</div>
                 </div>
             </div>
 

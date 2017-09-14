@@ -51,13 +51,13 @@
                     <div class="form-group row">
                         <div class="col-sm-9 ml-auto">
                             <div class="abc-checkbox abc-checkbox-primary checkbox-inline">
-                                <input type="checkbox" class="toggle-target" id="change_password" data-target=".password-fields">
+                                <input type="checkbox" class="toggle-content" id="change_password" data-toggle=".password-fields">
                                 <label for="change_password">Change Password</label>
                             </div>
                         </div>
                     </div>
 
-                    <div class="password-fields ignore-validation d-none">
+                    <div class="password-fields ignore-validation display-none">
 
                         <div class="form-group row">
                             <label class="col-form-label col-sm-3">Password</label>

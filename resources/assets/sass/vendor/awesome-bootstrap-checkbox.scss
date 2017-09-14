@@ -126,6 +126,7 @@ $check-icon: $fa-var-check !default;
 
   &.checkbox-inline{
     margin-top: 0;
+    display: inline-block;
   }
 }
 
@@ -241,6 +242,7 @@ $check-icon: $fa-var-check !default;
 
   &.radio-inline{
     margin-top: 0;
+    display: inline-block;
   }
 }
 
@@ -275,4 +277,8 @@ input[type="radio"] {
       }
     }
   }
+}
+
+.radio-inline + .radio-inline, .checkbox-inline + .checkbox-inline {
+  margin-left: 10px;
 }

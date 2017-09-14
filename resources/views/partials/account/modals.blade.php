@@ -37,7 +37,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-2 error-wrapper d-none">
+                    <div class="mt-2 error-wrapper display-none">
                         <div class="alert alert-alt alert-danger">
                             <button type="button" class="close" data-hide="error-wrapper" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <div class="mb10">

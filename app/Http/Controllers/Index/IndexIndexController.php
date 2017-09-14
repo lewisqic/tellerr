@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Index;
 
 use App\Plan;
 use App\Member;
+use App\Company;
 use App\Services\CompanyService;
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
@@ -120,9 +121,25 @@ class IndexIndexController extends Controller
     {
 
         // get request data
-        $data = \Request::json()->all();
+        $webhook = \Request::json()->all();
 
-        \Log::info($data);
+        switch ( $webhook['type'] ) {
+            case 'account.updated':
+
+                $account_id = $webhook['data']['object']['id'];
+                $company = Company::where('stripe_account_id', $account_id)->where('stripe_account_status', 'deferred')->first();
+                if ( $company ) {
+
+                    if ( $webhook['data']['object']['payouts_enabled'] ) {
+                        $this->companyService->update($company->id, [
+                            'stripe_account_status' => 'active'
+                        ]);
+                    }
+
+                }
+
+            break;
+        }
 
 
     }

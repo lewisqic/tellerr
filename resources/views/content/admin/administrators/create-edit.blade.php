@@ -61,14 +61,14 @@
                     <div class="form-group row">
                         <div class="col-sm-9 ml-auto">
                             <div class="abc-checkbox abc-checkbox-primary checkbox-inline">
-                                <input type="checkbox" class="toggle-target" id="change_password" data-target=".password-fields">
+                                <input type="checkbox" class="toggle-content" id="change_password" data-toggle=".password-fields">
                                 <label for="change_password">Change Password</label>
                             </div>
                         </div>
                     </div>
                 @endif
 
-                <div class="password-fields ignore-validation {{ $title == 'Edit' ? 'd-none' : '' }}">
+                <div class="password-fields ignore-validation {{ $title == 'Edit' ? 'display-none' : '' }}">
 
                     <div class="form-group row">
                         <label class="col-form-label col-sm-3">Password</label>
@@ -112,14 +112,14 @@
                     <div class="form-group row">
                         <div class="col-sm-9 ml-auto">
                             <div class="abc-checkbox abc-checkbox-primary checkbox-inline">
-                                <input type="checkbox" class="toggle-target" id="custom_permissions" data-target=".custom-permissions">
+                                <input type="checkbox" class="toggle-content" id="custom_permissions" data-toggle=".custom-permissions">
                                 <label for="custom_permissions">Custom Permissions</label>
                             </div>
                         </div>
                     </div>
                 @endif
 
-                <div class="custom-permissions ignore-validation {{ empty($user_permissions) ? 'd-none' : '' }}">
+                <div class="custom-permissions ignore-validation {{ empty($user_permissions) ? 'display-none' : '' }}">
 
                     <div class="form-group row">
                         <label class="col-form-label col-sm-3">
@@ -131,7 +131,7 @@
                                 @foreach ( $permissions as $group )
                                     <div class="permission-group-wrapper mb-3">
                                         <div class="group">
-                                            <div class="abc-checkbox abc-checkbox-primary checkbox-inline">
+                                            <div class="abc-checkbox abc-checkbox-primary">
                                                 <input type="checkbox" class="permission-group" id="{{ $group['label'] }}">
                                                 <label for="{{ $group['label'] }}">{{ $group['label'] }}</label>
                                             </div>
@@ -139,7 +139,7 @@
                                         <div class="functions ml-4">
                                             @foreach ( $group['actions'] as $key => $value )
                                                 @php $id = $group['controller'] . '@' . $key @endphp
-                                                <div class="abc-checkbox abc-checkbox-primary checkbox-inline">
+                                                <div class="abc-checkbox abc-checkbox-primary">
                                                     <input type="checkbox" class="permission-function" name="permissions[]" id="{{ $id }}" value="{{ $id }}" {{ isset($user_permissions[$id]) && $user_permissions[$id] ? 'checked' : '' }}>
                                                     <label for="{{ $id }}"><small>{{ $value }}</small></label>
                                                 </div>

@@ -41,14 +41,14 @@
 									<option value="{{ $plan->id }}" data-price="{{ Format::currency($plan->{'price_' . $subscription->installment}) }}" {{ $current_plan && $current_plan-> id == $plan->id ? 'disabled' : '' }}>{{ $plan->name }} {{ $current_plan && $current_plan-> id == $plan->id ? '(this is your current plan)' : '(' . Format::currency($plan->{'price_' . $subscription->installment}) . '/' . $subscription->installment . ')' }}</option>
 								@endforeach
 							</select>
-							<small class="form-text font-13">
+							<div class="form-text font-13">
 								Select the new plan that you would like to subscribe to.  <a href="{{ url('pricing') }}" target="_blank">Compare Plans <i class="fa fa-external-link"></i></a>
-							</small>
+							</div>
 						</div>
 					</div>
 
 
-					<div class="col-sm-9 ml-auto mt-4 d-none payment-required">
+					<div class="col-sm-9 ml-auto mt-4 display-none payment-required">
 						<div class="alert alert-info alert-alt">
 							<strong><i class="fa fa-info-circle"></i> Heads Up!</strong><br>
 							Your current subscription plan has a {{ $subscription->installment }}ly fee of <strong>{{ Format::currency($subscription->amount) }}</strong>. The new subscription plan you have selected has a {{ $subscription->installment }}ly fee of <strong class="new-plan-price"></strong>. In order to upgrade your subscription plan immediately, payment is due for the difference between subscription plan fees.
@@ -59,7 +59,7 @@
 				</div>
 				<div class="col-sm-6">
 
-					<div class="payment-required d-none">
+					<div class="payment-required display-none">
 
 						<div class="form-group row mb-4">
 							<div class="col-sm-9 ml-auto">
@@ -84,7 +84,7 @@
 												</option>
 											@endforeach
 										</select>
-										<small class="form-text text-muted">If you'd like to pay with a different card, please add it within your <a href="{{ url('account/billing/payment-methods') }}">payment methods</a> first.</small>
+										<div class="form-text text-muted font-13">If you'd like to pay with a different card, please add it within your <a href="{{ url('account/billing/payment-methods') }}">payment methods</a> first.</div>
 									</div>
 								</div>
 							</div>
@@ -116,7 +116,7 @@
 
 					</div>
 
-					<div class="no-payment-required d-none">
+					<div class="no-payment-required display-none">
 
 						<div class="form-group row mb-4">
 							<div class="col-sm-9 ml-auto">
@@ -138,7 +138,7 @@
 
 					@if ( !empty($payment_methods) )
 
-						<div class="form-group row mt-5 d-none payment-required no-payment-required">
+						<div class="form-group row mt-5 display-none payment-required no-payment-required">
 							<div class="col-sm-9 ml-auto">
 								<button type="submit" class="btn btn-lg btn-success btn-block submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin fa-lg'></i>"><i class="fa fa-check"></i> Submit Plan Change</button>
 							</div>
@@ -146,7 +146,7 @@
 
 					@endif
 
-					<div class="form-group row mt10 error-wrapper d-none">
+					<div class="form-group row mt10 error-wrapper display-none">
 						<div class="col-sm-9 ml-auto">
 							<div class="alert alert-alt alert-danger">
 								<button type="button" class="close" data-hide="error-wrapper" aria-label="Close"><span aria-hidden="true">&times;</span></button>

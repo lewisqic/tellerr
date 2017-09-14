@@ -59,6 +59,15 @@ button.btn[type="submit"] {
 /**
  * UTILITIES
  */
+.display-none {
+    display: none;
+}
+.display-inline {
+    display: inline
+}
+.display-inline-block {
+    display: inline-block;
+}
 .text-underline {
     text-decoration: underline;
 }
@@ -132,6 +141,9 @@ div.labels-right{
 }
 .tooltip {
     z-index: 9999;
+}
+.input-group + .fv-control-feedback {
+    right: 20px;
 }
 
 // toastr

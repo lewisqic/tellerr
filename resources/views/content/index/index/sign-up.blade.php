@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="form-group row d-none">
+            <div class="form-group row display-none">
                 <label class="col-form-label col-sm-4">Middle Name</label>
                 <div class="col-sm-8">
                     <input type="text" name="middle_name" class="form-control" placeholder="Middle Name" value="" data-fv-notempty="true">
@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <div class="form-group row d-none">
+            <div class="form-group row display-none">
                 <label class="col-form-label col-sm-4">Address</label>
                 <div class="col-sm-8">
                     <input type="text" name="address" class="form-control" placeholder="Address" value="adddresss" data-fv-notempty="true">

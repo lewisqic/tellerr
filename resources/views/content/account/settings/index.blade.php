@@ -24,7 +24,7 @@
                     <label class="col-form-label col-sm-3">Account URL</label>
                     <div class="col-sm-9 form-control-static">
                         https://<strong>{{ $company->subdomain }}</strong>.tellerr.com <a href="https://{{ $company->subdomain }}.tellerr.com" target="_blank"><i class="fa fa-external-link"></i></a>
-                        <small class="form-text text-muted">This is your own personalized Teller<sup>&reg;</sup> domain name.  We generally do not allow you to change this value once it's been set.<br>If you have a compelling reason to change this value then please <a href="{{ url('contact-us') }}" target="_blank">contact us</a> with your request.</small>
+                        <div class="form-text text-muted font-13">This is your own personalized Teller<sup>&reg;</sup> domain name.  We generally do not allow you to change this value once it's been set.<br>If you have a compelling reason to change this value then please <a href="{{ url('contact-us') }}" target="_blank">contact us</a> with your request.</div>
                     </div>
                 </div>
 
@@ -32,7 +32,7 @@
                     <label class="col-form-label col-sm-3">Account Email</label>
                     <div class="col-sm-9">
                         <input type="text" name="email" class="form-control" value="{{ $company->email }}" data-fv-notempty="true" data-fv-emailaddress="true">
-                        <small class="form-text text-muted">This is the default email address that all account related emails and notifications will be sent to.</small>
+                        <div class="form-text text-muted font-13">This is the default email address that all account related emails and notifications will be sent to.</div>
                     </div>
                 </div>
 
@@ -40,7 +40,7 @@
                     <label class="col-form-label col-sm-3">Company Name</label>
                     <div class="col-sm-9">
                         <input type="text" name="name" class="form-control" value="{{ $company->name }}">
-                        <small class="form-text text-muted">You can optionally enter in the name of your company or organization.</small>
+                        <div class="form-text text-muted font-13">You can optionally enter in the name of your company or organization.</div>
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
                             <option value="CAD" {{ $company->currency == 'CAD' ? 'selected' : '' }}>CAD</option>
                             <option value="AUD" {{ $company->currency == 'AUD' ? 'selected' : '' }}>AUD</option>
                         </select>
-                        <small class="form-text text-muted">This currency setting only applies to payments made by your own customers.  Your subscription payments to Tellerr will always be made in USD.</small>
+                        <div class="form-text text-muted font-13">This currency setting only applies to payments made by your own customers.  Your subscription payments to Tellerr will always be made in USD.</div>
                     </div>
                 </div>
 
@@ -68,7 +68,7 @@
                             <option value="Francais" {{ $company->language == 'Francais' ? 'selected' : '' }}>Français</option>
                             <option value="Deutsche" {{ $company->language == 'Deutsche' ? 'selected' : '' }}>Deutsche</option>
                         </select>
-                        <small class="form-text text-muted">Your default language setting will apply to your Tellerr account area as well as your own payment forms and invoices.</small>
+                        <div class="form-text text-muted font-13">Your default language setting will apply to your Tellerr account area as well as your own payment forms and invoices.</div>
                     </div>
                 </div>
 

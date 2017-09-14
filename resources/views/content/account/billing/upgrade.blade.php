@@ -32,9 +32,9 @@
 									<option value="{{ $plan->id }}" data-price-month="{{ Format::currency($plan->price_month) }}" data-price-year="{{ Format::currency($plan->price_year) }}" {{ $plan->id == $default_plan->id ? 'selected' : '' }}>{{ $plan->name }}</option>
 								@endforeach
 							</select>
-							<small class="form-text font-13">
+							<div class="form-text font-13">
 								Select the plan that you would like to subscribe to.  <a href="{{ url('pricing') }}" target="_blank">Compare Plans <i class="fa fa-external-link"></i></a>
-							</small>
+							</div>
 						</div>
 					</div>
 
@@ -49,9 +49,9 @@
 								<input type="radio" name="installment" id="installment_yearly" value="year" data-installment="year" data-price="{{ Format::currency($default_plan->price_year) }}" {{ $subscription->installment == 'year' ? 'checked' : '' }}>
 								<label for="installment_yearly"><strong class="text-success plan-price" data-installment="year">{{ Format::currency($default_plan->price_year) }}</strong>/year</label>
 							</div>
-							<small class="form-text font-13">
+							<div class="form-text font-13">
 								Select your preferred billing period. <span class="text-muted">(In it for the long haul? Go all in with annual billing and save 20% off the monthly rate!)</span>
-							</small>
+							</div>
 						</div>
 					</div>
 
@@ -119,7 +119,7 @@
 
 					@endif
 
-					<div class="payment-methods-wrapper {{ $payment_methods ? 'd-none' : '' }}" data-method="new">
+					<div class="payment-methods-wrapper {{ $payment_methods ? 'display-none' : '' }}" data-method="new">
 
 						<div class="form-group row">
 							<label class="col-form-label col-sm-3"  for="card_element">Credit/Debit Card</label>
@@ -151,13 +151,13 @@
 										</div>
 										<div class="col-sm-6">
 											<strong class="text-success installment-term" data-installment="month">{{ Carbon::now()->addMonth()->toFormattedDateString() }}</strong>
-											<strong class="text-success installment-term d-none" data-installment="year">{{ Carbon::now()->addYear()->toFormattedDateString() }}</strong>
+											<strong class="text-success installment-term display-none" data-installment="year">{{ Carbon::now()->addYear()->toFormattedDateString() }}</strong>
 										</div>
 									</div>
 									<small class="text-muted font-13">
 										Your card will be charged <span class="installment-price">{{ Format::currency($default_plan->price_month) }}</span> each
 										<span class="installment-term" data-installment="month">month</span>
-										<span class="installment-term d-none" data-installment="year">year</span>
+										<span class="installment-term display-none" data-installment="year">year</span>
 										while your subscription is active.  Feel free to cancel at anytime!
 									</small>
 
@@ -168,7 +168,7 @@
 
 					{{--<div class="form-group row">
 						<div class="col-sm-9 ml-auto">
-							<a href="#" class="text-muted font-14 toggle-target" data-target=".coupon-wrapper">Do you have a coupon code?</a>
+							<a href="#" class="text-muted font-14 toggle-content" data-toggle=".coupon-wrapper">Do you have a coupon code?</a>
 						</div>
 					</div>
 
@@ -178,10 +178,10 @@
 								<input type="text" class="form-control" name="coupon" placeholder="Coupon Code...">
 								<span class="input-group-btn">
 									<button type="submit" class="btn btn-primary apply-coupon">Apply</button>
-									<button type="submit" class="btn btn-primary remove-coupon d-none">Remove</button>
+									<button type="submit" class="btn btn-primary remove-coupon display-none">Remove</button>
 								</span>
 							</div>
-							<small class="form-text coupon-message"></small>
+							<div class="form-text font-13 coupon-message"></div>
 						</div>
 					</div>--}}
 
@@ -191,7 +191,7 @@
 						</div>
 					</div>
 
-					<div class="form-group row mt10 error-wrapper d-none">
+					<div class="form-group row mt10 error-wrapper display-none">
 						<div class="col-sm-9 ml-auto">
 							<div class="alert alert-alt alert-danger">
 								<button type="button" class="close" data-hide="error-wrapper" aria-label="Close"><span aria-hidden="true">&times;</span></button>

@@ -18931,6 +18931,7 @@ body.swal2-iosfix {
 
 .abc-checkbox.checkbox-inline {
   margin-top: 0;
+  display: inline-block;
 }
 
 .abc-checkbox-primary input[type="checkbox"]:checked + label::before,
@@ -19124,6 +19125,7 @@ body.swal2-iosfix {
 
 .abc-radio.radio-inline {
   margin-top: 0;
+  display: inline-block;
 }
 
 .abc-radio-primary input[type="radio"] + label::after {
@@ -19205,6 +19207,11 @@ input[type="radio"] .styled:checked + label::after {
 .has-danger .abc-checkbox label:before,
 .has-danger .abc-radio label:before {
   border-color: #F44336;
+}
+
+.radio-inline + .radio-inline,
+.checkbox-inline + .checkbox-inline {
+  margin-left: 10px;
 }
 
 table.dataTable {
@@ -19483,6 +19490,18 @@ button.btn[type="submit"] {
  * UTILITIES
  */
 
+.display-none {
+  display: none;
+}
+
+.display-inline {
+  display: inline;
+}
+
+.display-inline-block {
+  display: inline-block;
+}
+
 .text-underline {
   text-decoration: underline;
 }
@@ -19755,6 +19774,10 @@ div.labels-right .col-form-label {
 
 .tooltip {
   z-index: 9999;
+}
+
+.input-group + .fv-control-feedback {
+  right: 20px;
 }
 
 #toast-container.toast-top-full-width > div,
@@ -20913,5 +20936,151 @@ Auth
   font-weight: bold;
   background: #2196F3;
   color: #fff;
+}
+
+/**
+ * FORMS STYLES
+ */
+
+#create_edit_form_form .form-steps ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-right: -16px;
+  position: relative;
+  z-index: 9;
+}
+
+#create_edit_form_form .form-steps ul li {
+  font-size: 18px;
+  padding: 20px 20px;
+  text-align: right;
+  cursor: pointer;
+  color: #868e96;
+}
+
+#create_edit_form_form .form-steps ul li.active {
+  border: 1px solid #ddd;
+  border-right-color: #fff;
+  color: #2196F3;
+  font-weight: bold;
+  border-radius: 3px 0 0 3px;
+}
+
+#create_edit_form_form .form-steps ul li.error {
+  color: #F44336 !important;
+}
+
+#create_edit_form_form .form-steps ul li.error:before {
+  font-family: FontAwesome;
+  content: '\F071';
+  margin-right: 10px;
+}
+
+#create_edit_form_form .form-steps ul li:hover {
+  color: #2196F3;
+}
+
+#create_edit_form_form .form-fields {
+  border-left: 1px solid #ddd;
+}
+
+#create_edit_form_form .form-fields .form-step-content {
+  padding-left: 30px;
+}
+
+#create_edit_form_form .form-fields .form-step-content.active {
+  display: block;
+}
+
+#create_edit_form_form .form-fields .form-step-content .form-group {
+  margin-bottom: 25px;
+}
+
+#create_edit_form_form .form-fields .form-step-content .form-group > label {
+  display: block;
+  font-weight: bold;
+}
+
+#create_edit_form_form .form-fields .form-step-content .form-group .form-group {
+  margin-bottom: 15px;
+}
+
+#create_edit_form_form .form-fields .form-step-content .form-group .child-content {
+  border-left: 1px solid #ddd;
+  padding-left: 27px;
+  margin-top: 15px;
+}
+
+#create_edit_form_form .form-fields .form-step-content .form-group .input-group {
+  height: 38px;
+}
+
+#create_edit_form_form .form-fields .form-step-content h4 {
+  margin-bottom: 25px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+  margin-top: 21px;
+}
+
+#create_edit_form_form .form-fields .form-step-content .controls {
+  margin-top: 30px;
+  border-top: 1px solid #ddd;
+  padding-top: 30px;
+}
+
+#create_edit_form_form .form-fields .form-step-content .controls .save {
+  margin-left: 40px;
+}
+
+#create_edit_form_form .form-fields .form-step-content .delete-closest-field {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  z-index: 9;
+}
+
+#create_edit_form_form .form-fields .form-step-content .sortable-wrapper {
+  border: 3px solid #424242;
+  padding: 15px;
+  border-top-width: 10px;
+  border-radius: 3px;
+}
+
+#create_edit_form_form .form-fields .form-step-content .sortable-wrapper ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#create_edit_form_form .form-fields .form-step-content .sortable-wrapper ul li {
+  border: 1px solid #DFDFDF;
+  border-radius: 3px;
+  background: #F7F7F7;
+  padding: 5px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+#create_edit_form_form .form-fields .form-step-content .sortable-wrapper ul li.sortable-placeholder {
+  background: #fff;
+  border: 2px dashed #ccc;
+  height: 36px;
+}
+
+#create_edit_form_form .form-fields .form-step-content .sortable-wrapper ul li.disabled {
+  cursor: not-allowed;
+}
+
+#create_edit_form_form .form-fields .form-step-content .sortable-wrapper ul li:last-child {
+  margin-bottom: 0;
+}
+
+#create_edit_form_form .form-fields .form-step-content .sortable-wrapper .column-separator {
+  border-left: 3px solid #424242;
+  height: calc(100% + 30px);
+  position: absolute;
+  left: 0;
+  top: -15px;
 }
 

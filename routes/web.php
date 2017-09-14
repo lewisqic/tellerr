@@ -105,6 +105,11 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth:account', 'account']
     Route::get('settings', ['uses' => 'AccountSettingController@index']);
     Route::put('settings', ['uses' => 'AccountSettingController@update']);
 
+    // forms
+    Route::get('forms/data', ['uses' => 'AccountFormController@dataTables']);
+    Route::patch('forms/{id}', ['uses' => 'AccountFormController@restore']);
+    Route::resource('forms', 'AccountFormController');
+
     // users
     Route::get('users/data', ['uses' => 'AccountUserController@dataTables']);
     Route::patch('users/{id}', ['uses' => 'AccountUserController@restore']);

@@ -32,7 +32,7 @@
                             <label class="col-form-label col-sm-3">{{ $setting->label }}</label>
                             <div class="col-sm-9">
                                 <input type="text" name="settings[{{ $setting->key }}]" class="form-control" placeholder="{{ $setting->label }}" value="{{ $setting->value }}" {!! $setting->is_required ? 'data-fv-notempty="true"' : '' !!}>
-                                <small class="form-text text-muted">{{ $setting->description }}</small>
+                                <div class="form-text text-muted font-13">{{ $setting->description }}</div>
                             </div>
                         </div>
                     @endforeach

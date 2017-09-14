@@ -43,7 +43,7 @@
                     @foreach ( $permissions as $group )
                     <div class="permission-group-wrapper mb-3">
                         <div class="group">
-                            <div class="abc-checkbox abc-checkbox-primary checkbox-inline">
+                            <div class="abc-checkbox abc-checkbox-primary">
                                 <input type="checkbox" class="permission-group" id="{{ $group['label'] }}">
                                 <label for="{{ $group['label'] }}">{{ $group['label'] }}</label>
                             </div>
@@ -51,7 +51,7 @@
                         <div class="functions ml-4">
                             @foreach ( $group['actions'] as $key => $value )
                             @php $id = $group['controller'] . '@' . $key @endphp
-                            <div class="abc-checkbox abc-checkbox-primary checkbox-inline">
+                            <div class="abc-checkbox abc-checkbox-primary">
                                 <input type="checkbox" class="permission-function" name="permissions[]" id="{{ $id }}" value="{{ $id }}" {{ isset($auth_role->permissions[$id]) && $auth_role->permissions[$id] ? 'checked' : '' }}>
                                 <label for="{{ $id }}"><small>{{ $value }}</small></label>
                             </div>

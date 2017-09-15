@@ -171,7 +171,7 @@
 
                         </div>
 
-                        <div class="amount-type-set-specific child-content">
+                        <div class="amount-type-set-specific child-content" data-ignore-validation="true">
 
                             <div class="form-group">
                                 <label><span class="suggested-title display-none">Suggested</span> Amount(s)</label>
@@ -179,7 +179,7 @@
                                     <div class="col-sm-4">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                            <input type="text" name="amount[]" class="form-control" placeholder="0.00" value="">
+                                            <input type="text" name="amount[]" class="form-control" placeholder="0.00" value="" data-fv-notempty="true">
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
@@ -377,29 +377,29 @@
                                     <div class="form-group">
                                         <label>Subscription Start Date</label>
 
-                                        <select name="subscription_start" class="form-control toggle-content">
-                                            <option value="immediately" data-hide=".subscription-start-after-trial-wrapper, .subscription-start-fixed-date-wrapper, .subscription-start-day-month-wrapper">Immediately Upon Form Submission</option>
-                                            <option value="after_trial" data-show=".subscription-start-after-trial-wrapper" data-hide=".subscription-start-fixed-date-wrapper, .subscription-start-day-month-wrapper">After a Trial Period</option>
-                                            <option value="fixed_date" data-show=".subscription-start-fixed-date-wrapper" data-hide=".subscription-start-after-trial-wrapper, .subscription-start-day-month-wrapper">Set a Fixed Date</option>
-                                            <option value="day_month" data-show=".subscription-start-day-month-wrapper" data-hide=".subscription-start-after-trial-wrapper, .subscription-start-fixed-date-wrapper">Specific Day of the Month</option>
-                                            <option value="customer_decide" data-hide=".subscription-start-after-trial-wrapper, .subscription-start-fixed-date-wrapper, .subscription-start-day-month-wrapper">Let Customer Decide</option>
+                                        <select name="recurring_start" class="form-control toggle-content">
+                                            <option value="immediately" data-hide=".recurring-start-after-trial-wrapper, .recurring-start-fixed-date-wrapper, .recurring-start-day-month-wrapper">Immediately Upon Form Submission</option>
+                                            <option value="after_trial" data-show=".recurring-start-after-trial-wrapper" data-hide=".recurring-start-fixed-date-wrapper, .recurring-start-day-month-wrapper">After a Trial Period</option>
+                                            <option value="fixed_date" data-show=".recurring-start-fixed-date-wrapper" data-hide=".recurring-start-after-trial-wrapper, .recurring-start-day-month-wrapper">Set a Fixed Date</option>
+                                            <option value="day_month" data-show=".recurring-start-day-month-wrapper" data-hide=".recurring-start-after-trial-wrapper, .recurring-start-fixed-date-wrapper">Specific Day of the Month</option>
+                                            <option value="customer_decide" data-hide=".recurring-start-after-trial-wrapper, .recurring-start-fixed-date-wrapper, .recurring-start-day-month-wrapper">Let Customer Decide</option>
                                         </select>
                                         <div class="form-text text-muted font-13">Specify when you want the <em>Recurring  / Subscription</em> billing plan to begin.</div>
 
-                                        <div class="subscription-start-after-trial-wrapper child-content display-none">
+                                        <div class="recurring-start-after-trial-wrapper child-content display-none">
 
                                             <div class="form-group">
                                                 <label>Trial Period</label>
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <select name="subscription_start_after_trial_value" class="form-control">
+                                                        <select name="recurring_start_after_trial_value" class="form-control">
                                                             @for ( $i = 1; $i <= 12; $i++ )
                                                                 <option value="{{ $i }}">{{ $i }}</option>
                                                             @endfor
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <select name="subscription_start_after_trial_term" class="form-control">
+                                                        <select name="recurring_start_after_trial_term" class="form-control">
                                                             <option value="week">Week(s)</option>
                                                             <option value="month" selected>Month(s)</option>
                                                             <option value="year">Year(s)</option>
@@ -410,23 +410,23 @@
                                             </div>
 
                                         </div>
-                                        <div class="subscription-start-fixed-date-wrapper child-content display-none ignore-validation">
+                                        <div class="recurring-start-fixed-date-wrapper child-content display-none ignore-validation">
 
                                             <div class="form-group">
                                                 <label>Start Subscription On<span class="required text-danger">*</span></label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                    <input type="date" name="subscription_start_fixed_date" class="form-control" placeholder="mm/dd/yyyy" value="" data-fv-notempty="true">
+                                                    <input type="date" name="recurring_start_fixed_date" class="form-control" placeholder="mm/dd/yyyy" value="" data-fv-notempty="true">
                                                 </div>
                                                 <div class="form-text text-muted font-13">Billing will not begin until this date.</div>
                                             </div>
 
                                         </div>
-                                        <div class="subscription-start-day-month-wrapper child-content display-none">
+                                        <div class="recurring-start-day-month-wrapper child-content display-none">
 
                                             <div class="form-group">
                                                 <label>Set Day of the Month</label>
-                                                <select name="subscription_start_day_month" class="form-control">
+                                                <select name="recurring_start_day_month" class="form-control">
                                                     @for ( $i = 1; $i <= 31; $i++ )
                                                         <option value="{{ $i }}">{{ ordinal($i) }}</option>
                                                     @endfor
@@ -531,7 +531,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-form-label col-sm-3"><span class="required text-danger">*</span>Field Title</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" name="additional_fields_field_title[]" class="form-control" placeholder="Field Title" value="" data-fv-notempty="true">
+                                                        <input type="text" name="additional_fields_title[]" class="form-control" placeholder="Field Title" value="" data-fv-notempty="true">
                                                     </div>
                                                 </div>
                                             </div>
@@ -539,7 +539,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-form-label col-sm-3">Description</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" name="additional_fields_field_description[]" class="form-control" placeholder="Field Description" value="">
+                                                        <input type="text" name="additional_fields_description[]" class="form-control" placeholder="Field Description" value="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -550,7 +550,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-form-label col-sm-3">Field Type</label>
                                                     <div class="col-sm-9">
-                                                        <select name="additional_fields_field_type[]" class="form-control toggle-content">
+                                                        <select name="additional_fields_type[]" class="form-control toggle-content">
                                                             <option value="text" data-hide=".additional-fields-field-type-values" selected>Single Line Text</option>
                                                             <option value="paragraph" data-hide=".additional-fields-field-type-values">Paragraph Text</option>
                                                             <option value="dropdown" data-show=".additional-fields-field-type-values">Dropdown Menu</option>
@@ -581,13 +581,13 @@
                                             </div>
                                         </div>
 
-                                        <div class="additional-fields-field-type-values display-none">
+                                        <div class="additional-fields-field-type-values display-none ignore-validation">
                                             <div class="row">
                                                 <div class="col-sm-5">
                                                     <div class="form-group row">
                                                         <label class="col-form-label col-sm-3"><span class="required text-danger">*</span>Field Options</label>
                                                         <div class="col-sm-9">
-                                                            <textarea class="form-control" name="additional_fields_field_options[]" rows="3" placeholder="Field Option Values" data-fv-notempty="true"></textarea>
+                                                            <textarea class="form-control" name="additional_fields_options[]" rows="3" placeholder="Field Option Values" data-fv-notempty="true"></textarea>
                                                             <div class="form-text text-muted font-13">Type each field option on a separate line.</div>
                                                         </div>
                                                     </div>
@@ -675,7 +675,7 @@
 
                     <div class="form-group">
                         <label>Theme</label>
-                        <select name="additional_fields_field_type[]" class="form-control toggle-content">
+                        <select name="theme" class="form-control toggle-content">
                             <option value="default" selected>- Default Theme - </option>
                         </select>
                         <div class="form-text text-muted font-13">Select the theme to be used for this form.  You can create/manage themes <a href="{{ url('account/themes') }}" target="_blank">here</a>.</div>
@@ -704,35 +704,35 @@
                                     <ul class="sortable-single">
                                         <li>
                                             <i class="fa fa-arrows text-muted"></i> Form Title
-                                            <input type="hidden" name="components[]" value="title">
+                                            <input type="hidden" name="components_single[]" value="title">
                                         </li>
                                         <li>
                                             <i class="fa fa-arrows text-muted"></i> Form Description
-                                            <input type="hidden" name="components[]" value="description">
+                                            <input type="hidden" name="components_single[]" value="description">
                                         </li>
                                         <li>
                                             <i class="fa fa-arrows text-muted"></i> Amount / Fees
-                                            <input type="hidden" name="components[]" value="amount">
+                                            <input type="hidden" name="components_single[]" value="amount">
                                         </li>
                                         <li>
                                             <i class="fa fa-arrows text-muted"></i> Payment Frequency
-                                            <input type="hidden" name="components[]" value="frequency">
+                                            <input type="hidden" name="components_single[]" value="frequency">
                                         </li>
                                         <li>
                                             <i class="fa fa-arrows text-muted"></i> Additional Fields
-                                            <input type="hidden" name="components[]" value="additional">
+                                            <input type="hidden" name="components_single[]" value="additional">
                                         </li>
                                         <li>
                                             <i class="fa fa-arrows text-muted"></i> Coupon Field
-                                            <input type="hidden" name="components[]" value="coupon">
+                                            <input type="hidden" name="components_single[]" value="coupon">
                                         </li>
                                         <li>
                                             <i class="fa fa-arrows text-muted"></i> Credit/Debit Card Input
-                                            <input type="hidden" name="components[]" value="payment">
+                                            <input type="hidden" name="components_single[]" value="payment">
                                         </li>
                                         <li>
                                             <i class="fa fa-arrows text-muted"></i> Terms & Conditions Checkbox
-                                            <input type="hidden" name="components[]" value="terms">
+                                            <input type="hidden" name="components_single[]" value="terms">
                                         </li>
                                         <li class="disabled text-muted">
                                             <i class="fa fa-arrows text-muted"></i> Submit Button
@@ -756,19 +756,19 @@
                                             <ul class="sortable-double">
                                                 <li>
                                                     <i class="fa fa-arrows text-muted"></i> Form Title
-                                                    <input type="hidden" name="components[]" value="title">
+                                                    <input type="hidden" name="components_double[]" value="title">
                                                 </li>
                                                 <li>
                                                     <i class="fa fa-arrows text-muted"></i> Form Description
-                                                    <input type="hidden" name="components[]" value="description">
+                                                    <input type="hidden" name="components_double[]" value="description">
                                                 </li>
                                                 <li>
                                                     <i class="fa fa-arrows text-muted"></i> Amount / Fees
-                                                    <input type="hidden" name="components[]" value="amount">
+                                                    <input type="hidden" name="components_double[]" value="amount">
                                                 </li>
                                                 <li>
                                                     <i class="fa fa-arrows text-muted"></i> Payment Frequency
-                                                    <input type="hidden" name="components[]" value="frequency">
+                                                    <input type="hidden" name="components_double[]" value="frequency">
                                                 </li>
                                             </ul>
                                         </div>
@@ -777,19 +777,19 @@
                                             <ul class="sortable-double">
                                                 <li>
                                                     <i class="fa fa-arrows text-muted"></i> Additional Fields
-                                                    <input type="hidden" name="components[]" value="additional">
+                                                    <input type="hidden" name="components_double[]" value="additional">
                                                 </li>
                                                 <li>
                                                     <i class="fa fa-arrows text-muted"></i> Coupon Field
-                                                    <input type="hidden" name="components[]" value="coupon">
+                                                    <input type="hidden" name="components_double[]" value="coupon">
                                                 </li>
                                                 <li>
                                                     <i class="fa fa-arrows text-muted"></i> Credit/Debit Card Input
-                                                    <input type="hidden" name="components[]" value="payment">
+                                                    <input type="hidden" name="components_double[]" value="payment">
                                                 </li>
                                                 <li>
                                                     <i class="fa fa-arrows text-muted"></i> Terms & Conditions Checkbox
-                                                    <input type="hidden" name="components[]" value="terms">
+                                                    <input type="hidden" name="components_double[]" value="terms">
                                                 </li>
                                                 <li class="disabled text-muted">
                                                     <i class="fa fa-arrows text-muted"></i> Submit Button

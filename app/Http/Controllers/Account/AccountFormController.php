@@ -100,8 +100,13 @@ class AccountFormController extends Controller
     public function store()
     {
         $data = \Request::all();
+        
+        sd($data);
+        
+        sd(json_encode($data['amount_description']));
+        
         $form = $this->formService->create($data);
-        \Msg::success($form->name . ' form has been added successfully!');
+        \Msg::success('Payment form has been created successfully!');
         return redir('account/forms');
     }
 

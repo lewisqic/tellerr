@@ -5,7 +5,7 @@
     {!! Breadcrumbs::render('account/forms') !!}
 
     <div class="float-right">
-        <a href="{{ url('account/forms/create') }}" class="btn btn-primary"><i class="fa fa-wpforms"></i> Add Form</a>
+        <a href="{{ url('account/forms/create') }}" class="btn btn-primary"><i class="fa fa-wpforms"></i> Create Form</a>
     </div>
 
     <h1>Forms</h1>

@@ -180,7 +180,25 @@
                 <a href="{{ url('account') }}" class="nav-link  {{ nav_active('^account$') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('account/forms') }}" class="nav-link {{ nav_active('^account/forms') }}"><i class="fa fa-file-text-o"></i> <span>Forms</span></a>
+                <a href="{{ url('account/forms') }}" class="nav-link {{ nav_active('^account/forms') }}"><i class="fa fa-wpforms"></i> <span>Forms</span></a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('account/invoices') }}" class="nav-link {{ nav_active('^account/invoices') }}"><i class="fa fa-file-text-o"></i> <span>Invoices</span></a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('account/payments') }}" class="nav-link {{ nav_active('^account/payments') }}"><i class="fa fa-credit-card"></i> <span>Payments</span></a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('account/subscriptions') }}" class="nav-link {{ nav_active('^account/subscriptions') }}"><i class="fa fa-refresh"></i> <span>Subscriptions</span></a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('account/reports') }}" class="nav-link {{ nav_active('^account/reports') }}"><i class="fa fa-bar-chart"></i> <span>Reports</span></a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('account/coupons') }}" class="nav-link {{ nav_active('^account/coupons') }}"><i class="fa fa-tag"></i> <span>Coupons</span></a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('account/themes') }}" class="nav-link {{ nav_active('^account/themes') }}"><i class="fa fa-paint-brush"></i> <span>Themes</span></a>
             </li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs"></i> <span>System</span></a>

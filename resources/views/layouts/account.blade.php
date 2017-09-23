@@ -274,6 +274,8 @@
 
 </div>
 
+<div id="datepicker-wrapper"></div>
+
 
 <div class="sidebar-right" id="sidebar-right">
     <div class="cssload-container"><div class="cssload-whirlpool"></div></div>

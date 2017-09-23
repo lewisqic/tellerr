@@ -92,7 +92,18 @@ var Forms = function () {
 
             $('.sortable-double').sortable({
                 placeholder: 'sortable-placeholder',
-                connectWith: '.sortable-double'
+                items: 'li:not(.disabled)',
+                connectWith: '.sortable-double',
+                stop: function stop(event, ui) {
+                    $('.sortable-double input').each(function (index, el) {
+                        var col = $(this).closest('.sortable-double').attr('data-column');
+                        if (col === 'left') {
+                            $(el).attr('name', $(el).attr('name').replace(/right/, col));
+                        } else {
+                            $(el).attr('name', $(el).attr('name').replace(/left/, col));
+                        }
+                    });
+                }
             });
         }
     }]);

@@ -21,6 +21,8 @@ $fa-font-path: '../fonts';
 @import 'resources/assets/sass/vendor/abc';
 // datatables
 @import 'resources/assets/css/vendor/dataTables.bootstrap4';
+// datepicker
+@import 'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3';
 
 
 
@@ -53,6 +55,9 @@ button.btn[type="submit"] {
 .permissions-wrapper {
     overflow-y: auto;
     max-height: 520px;
+}
+#datepicker-wrapper {
+    position: relative;
 }
 
 

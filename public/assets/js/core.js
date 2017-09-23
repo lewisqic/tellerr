@@ -219,7 +219,7 @@ var Core = function () {
                     }
                     if ($contentShow.hasClass('ignore-validation')) {
                         $contentShow.removeClass('ignore-validation');
-                        $contentShow.attr('data-ignore-validation', true);
+                        $contentShow.attr('data-ignore-validation', 'true');
                     }
                     $contentShow.find('input.toggle-content:checked').trigger('click');
                 }
@@ -244,7 +244,9 @@ var Core = function () {
 
                 var $content = $($(this).attr('data-content')).clone(true);
                 $content.find('input').val('');
+                $content.find('textarea').val('');
                 $content.find('.show-after-clone').css('display', 'block');
+                $content.find('.hide-after-clone').css('display', 'none');
                 if ($content.hasClass('show-after-clone')) {
                     $content.css('display', 'block');
                 }
@@ -269,6 +271,7 @@ var Core = function () {
                 });
 
                 $content.find('input[data-default-checked="true"]').prop('checked', true);
+                $content.find('option[data-default-selected="true"]').prop('selected', true);
 
                 if ($(this).attr('data-insert-after')) {
                     $($(this).attr('data-insert-after')).after($content);
@@ -310,6 +313,12 @@ var Core = function () {
             });
             $('[data-toggle="tooltip"]').tooltip({
                 container: 'body'
+            });
+            $('.datepicker').datepicker({
+                autoclose: true,
+                format: 'mm/dd/yyyy',
+                todayHighlight: true,
+                container: '#datepicker-wrapper'
             });
         }
 

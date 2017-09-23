@@ -42,7 +42,7 @@ class AccountFormController extends Controller
      */
     public function dataTables()
     {
-        $data = $this->formService->dataTables(\Request::all());
+        $data = $this->formService->dataTables(\Request::all(), app('company')->id);
         return response()->json($data);
     }
 
@@ -57,6 +57,7 @@ class AccountFormController extends Controller
             'title' => 'Create',
             'method' => 'post',
             'action' => url('account/forms'),
+            'form' => null
         ];
         return view('content.account.forms.create-edit', $data);
     }
@@ -68,12 +69,14 @@ class AccountFormController extends Controller
      */
     public function edit($id)
     {
-        $form = Plan::findOrFail($id);
+        $form = Form::findOrFail($id);
+        $form = form_accessor($form);
         $data = [
             'title' => 'Edit',
             'method' => 'put',
             'action' => url('account/forms/' . $id),
             'form' => $form,
+            'component_name_map' => array_merge(Form::$componentNameMap['left'], Form::$componentNameMap['right'])
         ];
         return view('content.account.forms.create-edit', $data);
     }
@@ -85,7 +88,7 @@ class AccountFormController extends Controller
      */
     public function show($id)
     {
-        $form = Plan::findOrFail($id);
+        $form = Form::findOrFail($id);
         $data = [
             'form' => $form,
         ];
@@ -99,12 +102,9 @@ class AccountFormController extends Controller
      */
     public function store()
     {
-        $data = \Request::all();
-        
-        sd($data);
-        
-        sd(json_encode($data['amount_description']));
-        
+        $data = array_except(\Request::all(), ['_token', '_method']);
+        $data['company_id'] = app('company')->id;
+        $data['status'] = 'active';
         $form = $this->formService->create($data);
         \Msg::success('Payment form has been created successfully!');
         return redir('account/forms');
@@ -115,10 +115,11 @@ class AccountFormController extends Controller
      *
      * @return redirect
      */
-    public function update()
+    public function update($id)
     {
-        $form = $this->formService->update(\Request::input('id'), \Request::except('id'));
-        \Msg::success($form->name . ' form has been updated successfully!');
+        $data = array_except(\Request::all(), ['_token', '_method']);
+        $form = $this->formService->update($id, $data);
+        \Msg::success($form->title . ' form has been updated successfully!');
         return redir('account/forms');
     }
 
@@ -130,7 +131,19 @@ class AccountFormController extends Controller
     public function destroy($id)
     {
         $form = $this->formService->destroy($id);
-        \Msg::success($form->name . ' form has been deleted successfully!');
+        \Msg::success($form->title . ' form has been deleted successfully! ' . \Html::undoLink('account/forms/' . $form->id));
+        return redir('account/forms');
+    }
+
+    /**
+     * Restore a form record
+     *
+     * @return redirect
+     */
+    public function restore($id)
+    {
+        $form = $this->formService->restore($id);
+        \Msg::success($form->title . ' has been restored successfully!');
         return redir('account/forms');
     }
 

@@ -221,7 +221,7 @@
 \Breadcrumbs::register('account/forms/show', function($breadcrumbs, $form)
 {
     $breadcrumbs->parent('account/forms');
-    $breadcrumbs->push($form->name, url('account/forms/' . $form->id));
+    $breadcrumbs->push($form->title, url('account/forms/' . $form->id));
 });
 \Breadcrumbs::register('account/forms/edit', function($breadcrumbs, $form)
 {

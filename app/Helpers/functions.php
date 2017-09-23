@@ -107,3 +107,47 @@ function trial_days_left($subscription)
         return 0;
     }
 }
+
+/**
+ * mutate form data to prepare for insertion
+ * @param array $data
+ * @return array
+ */
+function form_mutator($data) {
+    $new_data = [];
+    foreach ( $data as $key => $value ) {
+        if ( is_array($value) ) {
+            foreach ( $value as $arr_key => $arr_value ) {
+                if ( $arr_value == 'yes' || $arr_value == 'no' ) {
+                    $value[$arr_key] = $arr_value == 'yes' ? 1 : 0;
+                }
+            }
+            $value = json_encode($value);
+        }
+        if ( $value == 'yes' || $value == 'no' ) {
+            $value = $value == 'yes' ? 1 : 0;
+        }
+        $new_data[$key] = $value;
+    }
+    return $new_data;
+}
+
+/**
+ * accesss form data for usage
+ * @param array $data
+ * @return array
+ */
+function form_accessor($data) {
+    $new_data = [];
+    if ( is_object($data) ) {
+        $data = $data->toArray();
+    }
+    foreach ( $data as $key => $value ) {
+        json_decode($value);
+        if ( json_last_error() == JSON_ERROR_NONE ) {
+            $value = json_decode($value, true);
+        }
+        $new_data[$key] = $value;
+    }
+    return $new_data;
+}

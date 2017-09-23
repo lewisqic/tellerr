@@ -65,6 +65,11 @@ class Company extends BaseModel
     {
         return $this->hasMany('App\CompanyPayment');
     }
+    // forms
+    public function forms()
+    {
+        return $this->hasMany('App\Form');
+    }
 
 
     /******************************************************************

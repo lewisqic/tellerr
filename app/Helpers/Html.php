@@ -51,7 +51,7 @@ class Html {
 			if ( is_null($url) ) continue;
 			switch ( $button ) {
 				case 'edit':
-					$buttons .= '<a href="' . $url . '" class="btn btn-sm btn-outline-light invisible open-sidebar"><i class="fa fa-lg fa-pencil-square-o text-primary"></i></a>';
+					$buttons .= '<a href="' . $url . '" class="btn btn-sm btn-outline-light invisible ' . (in_array('disable_sidebar', $buttons_arr) ? '' : 'open-sidebar') . '"><i class="fa fa-lg fa-pencil-square-o text-primary"></i></a>';
 				break;
 				case 'archive':
 					$buttons .= '<a href="' . $url . '" class="btn btn-sm btn-outline-light invisible"><i class="fa fa-lg fa-archive text-primary"></i></a>';

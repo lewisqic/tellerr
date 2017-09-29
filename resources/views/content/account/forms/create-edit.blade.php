@@ -54,7 +54,7 @@
                         <div class="description-wrapper child-content {{ $form && $form['show_description'] ? '' : 'display-none ignore-validation' }}" data-ignore-validation="true">
                             <div class="form-group">
                                 <label>Form Description<span class="required text-danger">*</span></label>
-                                <textarea class="form-control" name="description" rows="3" placeholder="Form Description" data-fv-notempty="true">{{ $form['description'] or '' }}</textarea>
+                                <textarea class="form-control" name="description" rows="3" placeholder="Form Description">{{ $form['description'] or '' }}</textarea>
                                 <div class="form-text text-muted font-13">Description or instructions that will be shown at the top of your form, right under the form title.</div>
                             </div>
                         </div>
@@ -589,7 +589,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-form-label col-sm-3"><span class="required text-danger">*</span>Values</label>
                                                         <div class="col-sm-9">
-                                                            <textarea class="form-control" name="additional_fields_options[]" rows="3" placeholder="Field Option Values" data-fv-notempty="true">{{ $form['additional_fields_options'][$key] }}</textarea>
+                                                            <textarea class="form-control" name="additional_fields_options[]" rows="3" placeholder="Field Option Values">{{ $form['additional_fields_options'][$key] }}</textarea>
                                                             <div class="form-text text-muted font-13">Type each field option on a separate line.</div>
                                                         </div>
                                                     </div>

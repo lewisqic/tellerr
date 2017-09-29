@@ -20554,6 +20554,22 @@ div.labels-right .col-form-label {
   border-color: #F44336;
 }
 
+.alert-success .alert-link {
+  color: #4CAF50;
+}
+
+.alert-info .alert-link {
+  color: #00BCD4;
+}
+
+.alert-warning .alert-link {
+  color: #FF9800;
+}
+
+.alert-danger .alert-link {
+  color: #F44336;
+}
+
 .tooltip {
   z-index: 9999;
 }

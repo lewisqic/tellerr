@@ -90,7 +90,7 @@ class Html {
 	{
 		$output = '<form action="' . url($route) . '" method="post" class="validate d-inline ml-2" id="restore_form">
                     ' . \Html::hiddenInput(['method' => 'patch']) . '
-                        <button type="submit" class="alert-link"><i class="fa fa-undo"></i> Undo</button>
+                        <button type="submit" class="alert-link text-underline"><i class="fa fa-undo"></i> Undo</button>
                     </form>';
 		return $output;
 	}

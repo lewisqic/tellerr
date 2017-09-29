@@ -104,6 +104,7 @@ class AccountFormController extends Controller
     {
         $data = array_except(\Request::all(), ['_token', '_method']);
         $data['company_id'] = app('company')->id;
+        $data['unique_id'] = uniqid();
         $data['status'] = 'active';
         $form = $this->formService->create($data);
         \Msg::success('Payment form has been created successfully!');

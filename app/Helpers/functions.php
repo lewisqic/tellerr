@@ -26,6 +26,16 @@ function redir($route) {
 }
 
 /**
+ * return a url to a company subdomain
+ * @param  string $route
+ * @return string
+ */
+function subdomain($route, $subdomain = null) {
+    $subdomain = is_null($subdomain) ? app('company')->subdomain : $subdomain;
+    return 'https://' . $subdomain . '.' . preg_replace('/(http:\/\/|www\.)/', '', url($route));
+}
+
+/**
  * custom function to check for permissions access
  * @param string $permission
  * @return boolean

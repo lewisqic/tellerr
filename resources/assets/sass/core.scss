@@ -144,6 +144,11 @@ div.labels-right{
     &.alert-warning { background-color: $brand-warning; border-color: $brand-warning; }
     &.alert-danger { background-color: $brand-danger; border-color: $brand-danger; }
 }
+.alert-success .alert-link { color: $brand-success; }
+.alert-info .alert-link { color: $brand-info; }
+.alert-warning .alert-link { color: $brand-warning; }
+.alert-danger .alert-link { color: $brand-danger; }
+
 .tooltip {
     z-index: 9999;
 }

@@ -228,3 +228,25 @@
     $breadcrumbs->parent('account/forms/show', $form);
     $breadcrumbs->push('Edit', url('account/forms/edit/' . $form->id));
 });
+
+// themes
+\Breadcrumbs::register('account/themes', function($breadcrumbs)
+{
+    $breadcrumbs->parent('account');
+    $breadcrumbs->push('Themes', url('account/themes'));
+});
+\Breadcrumbs::register('account/themes/create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('account/themes');
+    $breadcrumbs->push('Create', url('account/themes/create'));
+});
+\Breadcrumbs::register('account/themes/show', function($breadcrumbs, $theme)
+{
+    $breadcrumbs->parent('account/themes');
+    $breadcrumbs->push($theme->name, url('account/themes/' . $theme->id));
+});
+\Breadcrumbs::register('account/themes/edit', function($breadcrumbs, $theme)
+{
+    $breadcrumbs->parent('account/themes/show', $theme);
+    $breadcrumbs->push('Edit', url('account/themes/edit/' . $theme->id));
+});

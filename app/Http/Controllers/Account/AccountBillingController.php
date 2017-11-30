@@ -21,7 +21,10 @@ class AccountBillingController extends Controller {
 
 	/**
      * controller construct
+     *
      * @param CompanyPaymentMethodService $member_payment_service
+     * @param CompanyPaymentMethodService $company_payment_method_service
+     * @param CompanySubscriptionService $company_subscription_service
      */
     public function __construct(CompanyPaymentService $company_payment_service, CompanyPaymentMethodService $company_payment_method_service, CompanySubscriptionService $company_subscription_service)
     {
@@ -32,6 +35,7 @@ class AccountBillingController extends Controller {
 
     /**
      * show our subscription details page
+     *
      * @return view
      */
     public function showSubscription()
@@ -44,6 +48,7 @@ class AccountBillingController extends Controller {
 
     /**
      * show our payment method page
+     *
      * @return view
      */
     public function showPaymentMethods()
@@ -57,7 +62,8 @@ class AccountBillingController extends Controller {
     }
 
     /**
-     * show our subscription details page
+     * show our the billing history page
+     *
      * @return view
      */
     public function showBillingHistory()
@@ -68,7 +74,8 @@ class AccountBillingController extends Controller {
     }
 
     /**
-     * return json data for member payments
+     * return json data for company payments
+     *
      * @return json
      */
     public function dataTables()
@@ -79,6 +86,7 @@ class AccountBillingController extends Controller {
 
     /**
      * show our change plan page
+     *
      * @return view
      */
     public function showChangePlan()
@@ -106,7 +114,8 @@ class AccountBillingController extends Controller {
     }
 
     /**
-     * show our change sub page
+     * show our change subscription page
+     *
      * @return view
      */
     public function showUpgradeSubscription()
@@ -138,7 +147,8 @@ class AccountBillingController extends Controller {
 
     /**
      * handle our upgrade subscription request
-     * @return view
+     *
+     * @return json
      */
     public function handleUpgradeSubscription()
     {
@@ -149,6 +159,7 @@ class AccountBillingController extends Controller {
 
     /**
      * handle our cancel subscription request
+     *
      * @return redirect
      */
     public function handleCancelSubscription()
@@ -160,6 +171,7 @@ class AccountBillingController extends Controller {
 
     /**
      * handle our resume subscription request
+     *
      * @return redirect
      */
     public function handleResumeSubscription()
@@ -171,6 +183,7 @@ class AccountBillingController extends Controller {
 
     /**
      * change our subscription installment period
+     *
      * @return redirect 
      */
     public function handleChangeInstallment()
@@ -182,7 +195,8 @@ class AccountBillingController extends Controller {
 
     /**
      * handle our plan change request
-     * @return view
+     *
+     * @return json
      */
     public function handleAddPaymentMethod()
     {
@@ -192,8 +206,10 @@ class AccountBillingController extends Controller {
     }
 
     /**
-     * handle our plan change request
-     * @return view
+     * handle our delete payment method request
+     *
+     * @param int $id
+     * @return redirect
      */
     public function handleDeletePaymentMethod($id)
     {
@@ -203,8 +219,10 @@ class AccountBillingController extends Controller {
     }
 
     /**
-     * handle our plan change request
-     * @return view
+     * handle our set defautl payment method request
+     *
+     * @param int $id
+     * @return redirect
      */
     public function handleSetDefaultPaymentMethod($id)
     {
@@ -215,7 +233,8 @@ class AccountBillingController extends Controller {
 
     /**
      * handle our plan change request
-     * @return view
+     *
+     * @return redirect
      */
     public function handleChangePlan()
     {
@@ -226,7 +245,8 @@ class AccountBillingController extends Controller {
 
     /**
      * handle our cancel plan change request
-     * @return view
+     *
+     * @return redirect
      */
     public function handleCancelPlanChange()
     {

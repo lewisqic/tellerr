@@ -32,6 +32,7 @@ class CompanySubscriptionService extends BaseService
      * controller construct
      *
      * @param CompanyPaymentService $member_payment_service
+     * @param CompanyPaymentMethodService $member_payment_method_service
      */
     public function __construct(CompanyPaymentService $member_payment_service, CompanyPaymentMethodService $member_payment_method_service)
     {
@@ -42,10 +43,9 @@ class CompanySubscriptionService extends BaseService
     /**
      * create a new member subscription record
      *
-     * @param  array $data [description]
-     *
+     * @param  array $data
      * @throws \AppExcp
-     * @return array
+     * @return object
      */
     public function create($data)
     {
@@ -75,9 +75,9 @@ class CompanySubscriptionService extends BaseService
     /**
      * update a company subscription record
      *
+     * @param  int $id
      * @param  array $data
-     *
-     * @return array
+     * @return object
      */
     public function update($id, $data)
     {
@@ -92,9 +92,10 @@ class CompanySubscriptionService extends BaseService
     /**
      * update an existing member subscription record
      *
-     * @param  array $data [description]
-     *
-     * @return array
+     * @param  int $id
+     * @param  object $plan
+     * @param  string $installment
+     * @return object
      */
     public function updateAfterUpgrade($id, $plan, $installment)
     {
@@ -123,8 +124,8 @@ class CompanySubscriptionService extends BaseService
      * upgrade a subscription from trial to paid
      *
      * @param  array $data
-     *
-     * @return collection
+     * @throws \AppExcp
+     * @return array
      */
     public function upgrade($data)
     {
@@ -223,7 +224,8 @@ class CompanySubscriptionService extends BaseService
 
     /**
      * cancel a subscription
-     * @return obj
+     *
+     * @return object
      */
     public function cancel()
     {
@@ -240,7 +242,8 @@ class CompanySubscriptionService extends BaseService
 
     /**
      * resume a subscription
-     * @return obj
+     *
+     * @return object
      */
     public function resume()
     {
@@ -257,7 +260,9 @@ class CompanySubscriptionService extends BaseService
 
     /**
      * change a subscription instlalment
-     * @return obj
+     *
+     * @param array $data
+     * @return object
      */
     public function changeInstallment($data)
     {
@@ -272,6 +277,8 @@ class CompanySubscriptionService extends BaseService
 
     /**
      * change a subscription plan
+     *
+     * @param array $data
      * @return array
      */
     public function changePlan($data)
@@ -423,6 +430,8 @@ class CompanySubscriptionService extends BaseService
 
     /**
      * change a subscription plan
+     *
+     * @throws \AppExcp
      */
     public function processSubscriptionPayments()
     {

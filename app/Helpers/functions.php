@@ -153,9 +153,11 @@ function form_accessor($data) {
         $data = $data->toArray();
     }
     foreach ( $data as $key => $value ) {
-        json_decode($value);
-        if ( json_last_error() == JSON_ERROR_NONE ) {
-            $value = json_decode($value, true);
+        if ( is_string($value) ) {
+            json_decode($value);
+            if ( json_last_error() == JSON_ERROR_NONE ) {
+                $value = json_decode($value, true);
+            }
         }
         $new_data[$key] = $value;
     }

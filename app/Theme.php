@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CompanySubscription extends BaseModel
+class Theme extends BaseModel
 {
     use SoftDeletes;
 
@@ -20,12 +20,7 @@ class CompanySubscription extends BaseModel
      * @var array
      */
     protected $rules = [
-        'company_id'       => 'required',
-        'plan_privilege'   => 'required',
-        'plan_name'        => 'required',
-        'plan_price_month' => 'required',
-        'plan_price_year'  => 'required',
-        'status'           => 'required'
+        'name'            => 'required'
     ];
 
     /**
@@ -34,7 +29,7 @@ class CompanySubscription extends BaseModel
      * @var array
      */
     protected $dates = [
-        'trial_ends_at', 'canceled_at', 'next_billing_at', 'created_at', 'updated_at', 'deleted_at'
+        'created_at', 'updated_at', 'deleted_at'
     ];
 
 
@@ -42,31 +37,10 @@ class CompanySubscription extends BaseModel
      * MODEL RELATIONSHIPS
      ******************************************************************/
 
-
     // companies
     public function company()
     {
         return $this->belongsTo('App\Company');
-    }
-    // company_payments
-    public function payments()
-    {
-        return $this->hasMany('App\CompanyPayment');
-    }
-    // company_payment_methods
-    public function paymentMethods()
-    {
-        return $this->hasMany('App\CompanyPaymentMethod');
-    }
-    // plan_change_requests
-    public function planChangeRequest()
-    {
-        return $this->hasOne('App\PlanChangeRequest');
-    }
-    // status_history
-    public function statusHistory()
-    {
-        return $this->morphMany('App\StatusHistory', 'statusable');
     }
 
 
@@ -75,14 +49,39 @@ class CompanySubscription extends BaseModel
      ******************************************************************/
 
 
+
+    /******************************************************************
+     * MODEL ACCESSORS/MUTATORS
+     ******************************************************************/
+
+
+
+
     /******************************************************************
      * CUSTOM  PROPERTIES
      ******************************************************************/
 
 
 
+
     /******************************************************************
      * CUSTOM ORM ACTIONS
      ******************************************************************/
+
+    /**
+     * return all themes for a company
+     * @param  int $type
+     * @return collection
+     */
+    public static function queryByCompany($company_id, $with_trashed = false)
+    {
+        $themes = Theme::where('company_id', $company_id)
+            ->when($with_trashed, function($query) {
+                return $query->withTrashed();
+            })
+            ->get();
+        return $themes;
+    }
+
 
 }

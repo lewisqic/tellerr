@@ -37,7 +37,6 @@
                     <div class="form-group">
                         <label>Form Title<span class="required text-danger">*</span></label>
                         <input type="text" name="title" class="form-control" placeholder="Form Title" value="{{ $form['title'] or '' }}" data-fv-notempty="true" autofocus>
-                        <div class="form-text text-muted font-13">The form title will be shown at the top of the form page.</div>
                     </div>
 
                     <div class="form-group">

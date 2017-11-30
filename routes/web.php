@@ -3,12 +3,10 @@
 /**
  * subdomain routing for member areas
  */
-Route::group(['domain' => '{account}.tellerr.{tld}'], function($group) {
+Route::group(['domain' => '{account}.tellerr-v1.{tld}'], function($group) {
 
-    Route::get('/', ['uses' => 'Auth\IndexController@showLogin', 'middleware' => 'guest']);
-    Route::get('f/{id}', function($id) {
-        sd('Show FORM #' . $id);
-    });
+    Route::get('/', ['uses' => 'Auth\AuthIndexController@showLogin', 'middleware' => 'guest']);
+    Route::get('f/{id}', ['uses' => 'Index\IndexFormController@showForm']);
 
 
     // prevent www subdomain from matching all routes in this group
@@ -109,6 +107,11 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth:account', 'account']
     Route::get('forms/data', ['uses' => 'AccountFormController@dataTables']);
     Route::patch('forms/{id}', ['uses' => 'AccountFormController@restore']);
     Route::resource('forms', 'AccountFormController');
+
+    // themes
+    Route::get('themes/data', ['uses' => 'AccountThemeController@dataTables']);
+    Route::patch('themes/{id}', ['uses' => 'AccountThemeController@restore']);
+    Route::resource('themes', 'AccountThemeController');
 
     // users
     Route::get('users/data', ['uses' => 'AccountUserController@dataTables']);

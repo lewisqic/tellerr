@@ -37,6 +37,11 @@ class Form extends BaseModel
      * MODEL RELATIONSHIPS
      ******************************************************************/
 
+    // companies
+    public function company()
+    {
+        return $this->belongsTo('App\Company');
+    }
 
 
     /******************************************************************

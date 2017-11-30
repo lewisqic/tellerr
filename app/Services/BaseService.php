@@ -2,11 +2,12 @@
 
 namespace App\Services;
 
-class BaseService
+abstract class BaseService
 {
 
     /**
      * delete a record
+     *
      * @param  int  $id
      * @return object
      */
@@ -23,6 +24,7 @@ class BaseService
 
     /**
      * restore a record
+     *
      * @param  int  $id
      * @return object
      */

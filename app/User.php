@@ -48,16 +48,19 @@ class User extends BaseModel
     {
         return $this->hasOne('\App\RemarkSetting');
     }
+
     // administrators
     public function administrator()
     {
         return $this->hasOne('\App\Administrator');
     }
+
     // members
     public function member()
     {
         return $this->hasOne('\App\Member');
     }
+
     // roles
     public function roles()
     {
@@ -88,7 +91,7 @@ class User extends BaseModel
     /**
      * Hash password if needed
      *
-     * @param $value
+     * @param string $value
      */
     public function setPasswordAttribute($value)
     {
@@ -107,6 +110,7 @@ class User extends BaseModel
 
     /**
      * Declare our user types and their default route and database table
+     *
      * @var array
      */
     public static $types = [
@@ -128,7 +132,10 @@ class User extends BaseModel
 
     /**
      * return all users for a specific user type
+     *
      * @param  int $type
+     * @param  bool $with_trashed
+     * @param  int $company_id
      * @return collection
      */
     public static function queryByType($type, $with_trashed = false, $company_id = null)

@@ -24,7 +24,10 @@ class UserService extends BaseService
 
     /**
      * controller construct
+     *
      * @param AdministratorService $administrator_service
+     * @param MemberService $member_service
+     * @param RemarkSettingService $remark_setting_service
      */
     public function __construct(AdministratorService $administrator_service, MemberService $member_service, RemarkSettingService $remark_setting_service)
     {
@@ -36,8 +39,9 @@ class UserService extends BaseService
 
     /**
      * create a new user record
+     *
      * @param  array  $data
-     * @return array
+     * @return object
      */
     public function create($data)
     {
@@ -87,8 +91,10 @@ class UserService extends BaseService
 
     /**
      * update a user record
+     *
+     * @param  int  $id
      * @param  array  $data
-     * @return array
+     * @return object
      */
     public function update($id, $data)
     {
@@ -117,8 +123,9 @@ class UserService extends BaseService
 
     /**
      * authenticate a user based on the passed in credentials
+     *
      * @param  array $credentials
-     * @throws \Exception
+     * @throws \AppExcp
      * @return array
      */
     public function login($credentials)
@@ -138,6 +145,7 @@ class UserService extends BaseService
 
     /**
      * log out a user
+     *
      * @param int $user_id
      * @param bool $all
      * @return object
@@ -156,8 +164,9 @@ class UserService extends BaseService
 
     /**
      * send user a password reset email
+     *
      * @param  string $email
-     * @throws \Exception
+     * @throws \AppExcp
      */
     public function sendReminder($email)
     {
@@ -177,8 +186,9 @@ class UserService extends BaseService
 
     /**
      * reset a users password
+     *
      * @param  array $data
-     * @throws \Exception
+     * @throws \AppExcp
      * @return  array
      */
     public function resetPassword($data)
@@ -200,9 +210,10 @@ class UserService extends BaseService
 
     /**
      * find a users email address when supplied with a reminder code
+     *
      * @param  string $code
-     * @throws \Exception
-     * @return string
+     * @throws \AppExcp
+     * @return object
      */
     public function getUserFromReminderCode($code)
     {

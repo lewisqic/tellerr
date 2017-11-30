@@ -33,7 +33,6 @@ class SignUpConfirmation extends BaseMailable
     public function build()
     {
         return $this->view('emails.index.sign-up-confirmation')
-                    ->from('')
                     ->subject('Thank You For Signing Up With Tellerr!');
     }
 }

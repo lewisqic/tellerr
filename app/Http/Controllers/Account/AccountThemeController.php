@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\Them;
+use App\Theme;
 use App\Services\ThemeService;
 use App\Http\Controllers\Controller;
 
@@ -26,7 +26,7 @@ class AccountThemeController extends Controller
     }
 
     /**
-     * Show the forms list page
+     * Show the themes list page
      *
      * @return view
      */
@@ -47,7 +47,7 @@ class AccountThemeController extends Controller
     }
 
     /**
-     * Show the forms create page
+     * Show the themes create page
      *
      * @return view
      */
@@ -56,33 +56,32 @@ class AccountThemeController extends Controller
         $data = [
             'title' => 'Create',
             'method' => 'post',
-            'action' => url('account/forms'),
-            'form' => null
+            'action' => url('account/themes'),
+            'theme' => null
         ];
         return view('content.account.themes.create-edit', $data);
     }
 
     /**
-     * Show the forms create page
+     * Show the themes create page
      *
      * @return view
      */
     public function edit($id)
     {
         $theme = Theme::findOrFail($id);
-        $theme = form_accessor($theme);
         $data = [
             'title' => 'Edit',
             'method' => 'put',
-            'action' => url('account/forms/' . $id),
-            'form' => $theme,
+            'action' => url('account/themes/' . $id),
+            'theme' => $theme,
             'component_name_map' => array_merge(Theme::$componentNameMap['left'], Theme::$componentNameMap['right'])
         ];
         return view('content.account.themes.create-edit', $data);
     }
 
     /**
-     * Show an form
+     * Show an theme
      *
      * @return view
      */
@@ -90,13 +89,13 @@ class AccountThemeController extends Controller
     {
         $theme = Theme::findOrFail($id);
         $data = [
-            'form' => $theme,
+            'theme' => $theme,
         ];
         return view('content.account.themes.show', $data);
     }
 
     /**
-     * Create new form record
+     * Create new theme record
      *
      * @return redirect
      */
@@ -104,15 +103,13 @@ class AccountThemeController extends Controller
     {
         $data = array_except(\Request::all(), ['_token', '_method']);
         $data['company_id'] = app('company')->id;
-        $data['unique_id'] = uniqid();
-        $data['status'] = 'active';
         $theme = $this->themeService->create($data);
-        \Msg::success('Payment form has been created successfully!');
-        return redir('account/forms');
+        \Msg::success('Theme has been created successfully!');
+        return redir('account/themes');
     }
 
     /**
-     * Create new form record
+     * Create new theme record
      *
      * @return redirect
      */
@@ -120,24 +117,24 @@ class AccountThemeController extends Controller
     {
         $data = array_except(\Request::all(), ['_token', '_method']);
         $theme = $this->themeService->update($id, $data);
-        \Msg::success($theme->title . ' form has been updated successfully!');
-        return redir('account/forms');
+        \Msg::success($theme->title . ' theme has been updated successfully!');
+        return redir('account/themes');
     }
 
     /**
-     * Delete an form record
+     * Delete an theme record
      *
      * @return redirect
      */
     public function destroy($id)
     {
         $theme = $this->themeService->destroy($id);
-        \Msg::success($theme->title . ' form has been deleted successfully! ' . \Html::undoLink('account/forms/' . $theme->id));
-        return redir('account/forms');
+        \Msg::success($theme->title . ' theme has been deleted successfully! ' . \Html::undoLink('account/themes/' . $theme->id));
+        return redir('account/themes');
     }
 
     /**
-     * Restore a form record
+     * Restore a theme record
      *
      * @return redirect
      */
@@ -145,7 +142,7 @@ class AccountThemeController extends Controller
     {
         $theme = $this->themeService->restore($id);
         \Msg::success($theme->title . ' has been restored successfully!');
-        return redir('account/forms');
+        return redir('account/themes');
     }
 
 

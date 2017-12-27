@@ -4,7 +4,10 @@
 
     {!! Breadcrumbs::render('account/activate') !!}
 
-    <h1>Account Activation</h1>
+    <h1>
+        Account Activation
+        <small class="text-warning font-16">Activate your account to accept live payments. Until then, feel free to test your payment forms and invoices using <a href="{{ url('testing') }}" target="_blank">test credit card numbers</a>.</small>
+    </h1>
 
     <div class="page-content container-fluid">
 

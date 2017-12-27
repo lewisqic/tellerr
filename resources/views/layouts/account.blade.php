@@ -63,7 +63,7 @@
                     <i class="fa fa-info-circle"></i> Your Stripe account still needs to be verified, <a href="{{ url('account/verify') }}" class="text-underline">click here</a> for more details.
                 </div>
                 @endif
-                @if ( $company->setup_completed && empty($company->stripe_account_status) )
+                @if ( $company->setup_completed && empty($company->stripe_account_status) && \Request::path() !== 'account/activate' )
                     <div class="alert alert-warning alert-alt ml-5 mt-3 py-2">
                         <i class="fa fa-info-circle"></i> You need to <a href="{{ url('account/activate') }}" class="text-warning text-underline">activate your account</a> before you can accept live payments.
                     </div>

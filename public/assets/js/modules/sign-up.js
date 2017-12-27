@@ -3,7 +3,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /******************************************************
- * Auth class used on our auth route form actions
+ * Signup class used on the public sign up page
  ******************************************************/
 var SignUp = function () {
 

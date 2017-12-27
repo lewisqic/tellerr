@@ -1,5 +1,5 @@
 /******************************************************
- * Auth class used on our auth route form actions
+ * Signup class used on the public sign up page
  ******************************************************/
 class SignUp {
 

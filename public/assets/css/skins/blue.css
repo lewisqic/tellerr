@@ -21667,6 +21667,10 @@ Auth
   color: #00BCD4;
 }
 
+.sidebar-minimized .trial-sandbox-wrapper {
+  display: none;
+}
+
 /**
  * BILLING SECTION STYLES
  */

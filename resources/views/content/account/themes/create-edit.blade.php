@@ -19,7 +19,7 @@
         <div class="form-group row">
             <label class="col-form-label col-sm-3">Name</label>
             <div class="col-sm-9">
-                <input type="text" name="name" class="form-control" placeholder="Name" value="{{ $theme->name or old('name') }}" data-fv-notempty="true" data-fv-stringlength="true" data-fv-stringlength-min="2" data-fv-stringlength-max="80" autofocus>
+                <input type="text" name="name" class="form-control" placeholder="Name" value="{{ $theme->name or old('name') }}" data-fv-notempty="true" autofocus>
             </div>
         </div>
 

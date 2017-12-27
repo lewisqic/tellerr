@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Form;
+use App\Theme;
 
 class ThemeService extends BaseService
 {

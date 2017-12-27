@@ -18,84 +18,28 @@
 
         <div class="labels-right">
 
-            <ul class="nav nav-tabs hash-tabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#show_details" role="tab">Details</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#show_users" role="tab">Users</a>
-                </li>
-            </ul>
-
-            <div class="tab-content mt-4">
-                <div class="tab-pane active" id="show_details" role="tabpanel">
-
-                    <div class="form-group row">
-                        <label class="col-form-label col-sm-2">Name:</label>
-                        <div class="col-sm-10 form-control-static">
-                            {{ $role->name }}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-form-label col-sm-2">Default:</label>
-                        <div class="col-sm-10 form-control-static">
-                            {{ $role->is_default ? 'Yes' : 'No' }}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-form-label col-sm-2">Permissions:</label>
-                        <div class="col-sm-10 form-control-static">
-                            @foreach ( $permissions as $group )
-                                @if ( preg_match('/' . $group['controller'] . '@/', $role->permissions) )
-                                    <div>{{ $group['label'] }}</div>
-                                @endif
-                                @foreach ( $group['actions'] as $key => $value )
-                                    @php $id = $group['controller'] . '@' . $key @endphp
-                                    @if ( isset($auth_role->permissions[$id]) )
-                                        <div class="ml-4"><small>{{ $value }}</small></div>
-                                    @endif
-                                @endforeach
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <br>
-
-                    @if ( $role->updated_at )
-                        <div class="form-group row">
-                            <label class="col-form-label col-sm-2">Last Updated:</label>
-                            <div class="col-sm-10 form-control-static">
-                                {{ $role->updated_at->toDayDateTimeString() }}
-                            </div>
-                        </div>
-                    @endif
-
-                    <div class="form-group row">
-                        <label class="col-form-label col-sm-2">Date Created:</label>
-                        <div class="col-sm-10 form-control-static">
-                            {{ $role->created_at->toDayDateTimeString() }}
-                        </div>
-                    </div>
-
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">Name:</label>
+                <div class="col-sm-10 form-control-static">
+                    {{ $role->name }}
                 </div>
-                <div class="tab-pane" id="show_users" role="tabpanel">
+            </div>
 
-                    <table id="list_role_users_table" class="datatable table table-striped table-hover" data-url="{{ url('account/users/data') }}" data-params='{"role_id": "{{ $role->id }}"}'>
-                        <thead>
-                            <tr>
-                                <th data-name="first_name" data-order="primary-asc">First Name</th>
-                                <th data-name="last_name">Last Name</th>
-                                <th data-name="email">Email</th>
-                                <th data-name="roles">Role(s)</th>
-                                <th data-name="created_at" data-o-sort="true">Date Created</th>
-                                {!! Html::dataTablesActionColumn(true) !!}
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+            <br>
 
+            @if ( $role->updated_at )
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-2">Last Updated:</label>
+                    <div class="col-sm-10 form-control-static">
+                        {{ $role->updated_at->toDayDateTimeString() }}
+                    </div>
+                </div>
+            @endif
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2">Date Created:</label>
+                <div class="col-sm-10 form-control-static">
+                    {{ $role->created_at->toDayDateTimeString() }}
                 </div>
             </div>
 

@@ -13,6 +13,7 @@
     "animate.css": "^3.5.2",
     "axios": "^0.16.2",
     "bootstrap": "^4.0.0-beta",
+    "bootstrap-colorpicker": "^2.5.2",
     "bootstrap-datepicker": "^1.7.1",
     "browser-sync": "^2.18.13",
     "browser-sync-webpack-plugin": "^1.2.0",

@@ -25,6 +25,7 @@ mix.scripts([
         'node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js',
         'node_modules/sweetalert2/dist/sweetalert2.js',
         'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+        'node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js',
         'resources/assets/js/vendor/jquery-ui.min.js',
         'resources/assets/js/vendor/formvalidation/formValidation.popular.min.js',
         'resources/assets/js/vendor/formvalidation/bootstrap4.min.js',

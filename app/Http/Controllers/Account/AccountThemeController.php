@@ -75,7 +75,6 @@ class AccountThemeController extends Controller
             'method' => 'put',
             'action' => url('account/themes/' . $id),
             'theme' => $theme,
-            'component_name_map' => array_merge(Theme::$componentNameMap['left'], Theme::$componentNameMap['right'])
         ];
         return view('content.account.themes.create-edit', $data);
     }

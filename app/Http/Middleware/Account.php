@@ -43,7 +43,7 @@ class Account
         }
 
         // check for setup completed flag, redirect if needed
-        if ( !$company->setup_completed && !preg_match('/^account\/(setup|create-stripe-account|stripe-connect|billing|profile)/', $request->path()) ) {
+        if ( !$company->setup_completed && !preg_match('/^account\/(setup|create-stripe-account|stripe-connect|billing|profile|remark-setting)/', $request->path()) ) {
             return redir('account/setup');
         }
 

@@ -94,7 +94,7 @@
                     <div class="col-sm-9 ml-auto">
                         <h4>Account Activation</h4>
                         <div class="text-muted">
-                            You must complete the account activation process before accepting live payments.
+                            You must complete the account activation process before accepting <strong>live</strong> payments. <br><small>(You can test your payment forms and invoices using test card numbers before activating your account.)</small>
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="float-left mr-4"><i class="fa fa-cc-stripe fa-4x" style="color: #32325D;"></i></div>
-                                <div class="font-18 mt-2">We've partnered with <strong>Stripe</strong>, one of the world's leading providers of online payments, to securely process all credit/debit card transactions made through Tellerr.</div>
+                                <div class="font-18">We've partnered with <strong>Stripe</strong>, one of the world's leading providers of online payments, to securely process all credit/debit card transactions made through Tellerr.</div>
                             </div>
                         </div>
 
@@ -143,7 +143,7 @@
                     <div class="row mb-3">
                         <div class="col-sm-6 mx-auto">
 
-                            <div class="alert alert-alt alert-primary mt-1 pr-0">
+                            <div class="alert alert-alt alert-warning mt-1 pr-0">
 
                                 <h5 class="mt-2 mb-3 font-18">Great choice! Now, there are a few important things you need to know...</h5>
 
@@ -270,13 +270,14 @@
                     <div class="col-sm-9 ml-auto">
                         <h4>What's Next</h4>
                         <div class="text-muted">
-                            You're just about done with the setup wizard, so what's next?
+                            That's pretty much it for the setup wizard, easy right?
                         </div>
                     </div>
                 </div>
 
                 <div class="row mt-2 mb-3">
                     <div class="col-sm-6 mx-auto font-18">
+                        <span class="text-primary">So where do I go after I'm finished with the setup wizard?</span><br>
                         To kick things off, we recommend...
                     </div>
                 </div>

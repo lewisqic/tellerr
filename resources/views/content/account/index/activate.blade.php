@@ -23,7 +23,7 @@
             </div>
 
 
-            <div class="alert alert-alt alert-primary mt-1 mb-4 pr-0">
+            <div class="alert alert-alt alert-warning mt-1 mb-4 pr-0">
 
                 <h5 class="mt-2 mb-3 font-18">There are a few important things you need to know...</h5>
 

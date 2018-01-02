@@ -320,6 +320,12 @@ var Core = function () {
                 todayHighlight: true,
                 container: '#datepicker-wrapper'
             });
+            $('.color-picker').colorpicker({
+                align: 'left'
+            });
+            $('.color-picker input').on('focus', function () {
+                $(this).closest('.color-picker').colorpicker('show');
+            });
         }
 
         /**

@@ -12,7 +12,7 @@
         </form>
     </div>
 
-    <h1>{{ $role->name }} <small>Role</small></h1>
+    <h1>{{ $role->name }} <small>Theme</small></h1>
 
     <div class="page-content container-fluid">
 

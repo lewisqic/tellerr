@@ -23,6 +23,8 @@ $fa-font-path: '../fonts';
 @import 'resources/assets/css/vendor/dataTables.bootstrap4';
 // datepicker
 @import 'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3';
+// colorpicker
+@import 'node_modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker';
 
 
 
@@ -355,6 +357,11 @@ div.labels-right{
 // swal
 .swal2-modal .swal2-buttonswrapper {
     margin-top: 30px;
+}
+
+// color picker
+div.colorpicker {
+    z-index: 9999999;
 }
 
 // datatables

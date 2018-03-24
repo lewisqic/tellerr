@@ -27,6 +27,10 @@ class ThemeService extends BaseService
      */
     public function create($data)
     {
+
+        $data['logo_image'] = $this->uploadImage('logo_image', $data['logo_image']);
+        $data['background_image'] = $this->uploadImage('background_image', $data['background_image']);
+
         // create the theme
         $theme = Theme::create($data);
         return $theme;
@@ -39,8 +43,18 @@ class ThemeService extends BaseService
      */
     public function update($id, $data)
     {
-        // update the role
         $theme = Theme::findOrFail($id);
+
+        $logo_image = isset($data['delete_logo']) ? $this->deleteImage($theme['logo_image']) : $theme->logo_image;
+        $background_image = isset($data['delete_background']) ? $this->deleteImage($theme['background_image']) : $theme->background_image;
+
+        $logo_image = isset($data['logo_image']) ? $this->uploadImage('logo_image', $data['logo_image']) : $logo_image;
+        $background_image = isset($data['background_image']) ? $this->uploadImage('background_image', $data['background_image']) : $background_image;
+
+        $data['logo_image'] = $logo_image;
+        $data['background_image'] = $background_image;
+
+        // update the theme
         $theme->fill($data);
         $theme->save();
         return $theme;
@@ -74,6 +88,39 @@ class ThemeService extends BaseService
             ];
         }
         return $themes_arr;
+    }
+
+    /**
+     * Upload our logo and/or background images
+     * @param $image
+     * @param $data
+     *
+     * @return null
+     * @throws \AppExcp
+     */
+    public function uploadImage($image, $file) {
+
+        $filename = null;
+        if ( !empty($file) && $file->isValid() ) {
+            if ( $file->getClientSize() > 2097152 ) {
+                throw new \AppExcp('Your ' . $image . ' image is too large.');
+            }
+            $filename = $file->store($image == 'logo_image' ? 'theme_logos' : 'theme_backgrounds', 'public');
+        }
+
+        return $filename;
+
+    }
+
+    /**
+     * Delete an existing theme image
+     * @param $image
+     *
+     * @return null
+     */
+    public function deleteImage($image) {
+        \Storage::disk('public')->delete($image);
+        return null;
     }
 
 

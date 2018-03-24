@@ -59,8 +59,22 @@
             <div class="form-group row">
                 <label class="col-form-label col-sm-3">Logo Image</label>
                 <div class="col-sm-9 form-control-static">
-                    <input type="file" name="logo_image">
-                    <div class="form-text text-muted font-13">Upload the logo image you want displayed. Max file size: 2MB.</div>
+                    @if ( $theme && $theme->logo_image )
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img src="{{ Storage::url($theme->logo_image) }}" class="w-100">
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="abc-checkbox abc-checkbox-primary checkbox-inline">
+                                    <input type="checkbox" name="delete_logo" id="delete_logo" value="1">
+                                    <label for="delete_logo">Delete Logo Image</label>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <input type="file" name="logo_image">
+                        <div class="form-text text-muted font-13">Upload the logo image you want displayed. Max file size: 2MB.</div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -98,8 +112,22 @@
             <div class="form-group row">
                 <label class="col-form-label col-sm-3">Background Image</label>
                 <div class="col-sm-9 form-control-static">
-                    <input type="file" name="background_image">
-                    <div class="form-text text-muted font-13">Upload the image to be used for the page background. Max file size: 2MB.</div>
+                    @if ( $theme && $theme->background_image )
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img src="{{ Storage::url($theme->background_image) }}" class="w-100">
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="abc-checkbox abc-checkbox-primary checkbox-inline">
+                                    <input type="checkbox" name="delete_background" id="delete_background" value="1">
+                                    <label for="delete_background">Delete Background Image</label>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <input type="file" name="background_image">
+                        <div class="form-text text-muted font-13">Upload the image to be used for the page background. Max file size: 2MB.</div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -109,7 +137,7 @@
             <div class="col-sm-9">
                 <div class="input-group color-picker colorpicker-component">
                     <span class="input-group-addon"><i></i></span>
-                    <input type="text" name="primary_color" class="form-control" placeholder="#abc123" value="{{ $theme && $theme->primary_color ? $theme->background_color : '#2096f3' }}" data-fv-notempty="true">
+                    <input type="text" name="primary_color" class="form-control" placeholder="#abc123" value="{{ $theme && $theme->primary_color ? $theme->primary_color : '#2096f3' }}" data-fv-notempty="true">
                 </div>
                 <div class="form-text text-muted font-13">Select (or manually type) the primary color to be used on the form page.</div>
             </div>
@@ -120,7 +148,7 @@
             <div class="col-sm-9">
                 <div class="input-group color-picker colorpicker-component">
                     <span class="input-group-addon"><i></i></span>
-                    <input type="text" name="secondary_color" class="form-control" placeholder="#abc123" value="{{ $theme && $theme->secondary_color ? $theme->background_color : '#212121' }}" data-fv-notempty="true">
+                    <input type="text" name="secondary_color" class="form-control" placeholder="#abc123" value="{{ $theme && $theme->secondary_color ? $theme->secondary_color : '#212121' }}" data-fv-notempty="true">
                 </div>
                 <div class="form-text text-muted font-13">Select (or manually type) the secondary color to be used on the form page.</div>
             </div>

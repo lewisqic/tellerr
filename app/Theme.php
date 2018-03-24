@@ -32,6 +32,13 @@ class Theme extends BaseModel
         'created_at', 'updated_at', 'deleted_at'
     ];
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = ['delete_logo', 'delete_background'];
+
 
     /******************************************************************
      * MODEL RELATIONSHIPS
@@ -79,6 +86,7 @@ class Theme extends BaseModel
             ->when($with_trashed, function($query) {
                 return $query->withTrashed();
             })
+            ->orderBy('name', 'asc')
             ->get();
         return $themes;
     }

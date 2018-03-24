@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use App\Form;
+use App\Theme;
 use App\Services\FormService;
 use App\Http\Controllers\Controller;
 
@@ -57,7 +58,8 @@ class AccountFormController extends Controller
             'title' => 'Create',
             'method' => 'post',
             'action' => url('account/forms'),
-            'form' => null
+            'form' => null,
+            'themes' => Theme::queryByCompany(app('company')->id)
         ];
         return view('content.account.forms.create-edit', $data);
     }
@@ -76,6 +78,7 @@ class AccountFormController extends Controller
             'method' => 'put',
             'action' => url('account/forms/' . $id),
             'form' => $form,
+            'themes' => Theme::queryByCompany(app('company')->id),
             'component_name_map' => array_merge(Form::$componentNameMap['left'], Form::$componentNameMap['right'])
         ];
         return view('content.account.forms.create-edit', $data);

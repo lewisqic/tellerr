@@ -44,9 +44,44 @@
                 <div class="tab-pane active" id="overview" role="tabpanel">
 
                     <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Form ID:</label>
+                        <div class="col-sm-10 form-control-static">
+                            {{ $form->unique_id }}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label class="col-form-label col-sm-2">Title:</label>
                         <div class="col-sm-10 form-control-static">
                             {{ $form->title }}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Show Form Description:</label>
+                        <div class="col-sm-10 form-control-static">
+                            {{ $form->show_description ? 'Yes' : 'No' }}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Form Description:</label>
+                        <div class="col-sm-10 form-control-static">
+                            {{ $form->description }}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Add Terms & Conditions:</label>
+                        <div class="col-sm-10 form-control-static">
+                            {{ $form->terms ? 'Yes' : 'No' }}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2">Terms & Conditions Text:</label>
+                        <div class="col-sm-10 form-control-static">
+                            {{ $form->terms }}
                         </div>
                     </div>
 
@@ -68,23 +103,6 @@
                             {{ $form->created_at->toDayDateTimeString() }}
                         </div>
                     </div>
-
-                </div>
-                <div class="tab-pane" id="show_users" role="tabpanel">
-
-                    <table id="list_role_users_table" class="datatable table table-striped table-hover" data-url="{{ url('account/forms/data') }}" data-params='{"role_id": "{{ $form->id }}"}'>
-                        <thead>
-                            <tr>
-                                <th data-name="first_name" data-order="primary-asc">First Name</th>
-                                <th data-name="last_name">Last Name</th>
-                                <th data-name="email">Email</th>
-                                <th data-name="last_login" data-o-sort="true">Last Login</th>
-                                <th data-name="created_at" data-o-sort="true">Date Created</th>
-                                {!! Html::dataTablesActionColumn(true) !!}
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
 
                 </div>
             </div>

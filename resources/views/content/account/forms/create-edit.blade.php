@@ -680,6 +680,9 @@
                         <label>Theme</label>
                         <select name="theme" class="form-control toggle-content">
                             <option value="default" {{ !$form || $form['theme'] == 'default' ? 'selected' : '' }}>- Default Theme - </option>
+                            @foreach ( $themes as $theme )
+                            <option value="{{ $theme->id }}" {{ $form && $form['theme'] == $theme->id ? 'selected' : '' }}>{{ $theme->name }}</option>
+                            @endforeach
                         </select>
                         <div class="form-text text-muted font-13">Select the theme to be used for this form.  You can create/manage themes <a href="{{ url('account/themes') }}" target="_blank">here</a>.</div>
                     </div>
